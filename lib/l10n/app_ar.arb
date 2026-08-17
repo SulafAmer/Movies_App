@@ -4,7 +4,7 @@
   "password": "كلمة المرور",
   "loginButton": "تسجيل الدخول",
   "forgetPassword": "نسيت كلمة المرور؟",
-  "noAccount": "مفيش حساب؟",
+  "noAccount": "ليس لديك حساب؟",
   "createOne": "أنشئ حساب",
   "or": "أو",
   "loginWithGoogle": "تسجيل الدخول بجوجل",
