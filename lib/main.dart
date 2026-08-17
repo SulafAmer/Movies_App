@@ -1,8 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:movies_app/l10n/app_localizations.dart';
+import 'package:movies_app/providers/app_language_provider.dart';
+import 'package:movies_app/ui/login/login_screen.dart';
+import 'package:movies_app/ui/login/register_screen.dart';
+import 'package:movies_app/utils/app_routes.dart';
+import 'package:provider/provider.dart';
 
 void main() {
-  runApp(MoviesApp());
+  runApp(ChangeNotifierProvider(create: (BuildContext context) { return AppLanguageProvider(); },
+  child: MoviesApp()));
 }
 
 class MoviesApp extends StatelessWidget {
@@ -10,8 +16,15 @@ class MoviesApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var langProvider=Provider.of<AppLanguageProvider>(context);
     return MaterialApp(
       debugShowCheckedModeBanner: false,
+      initialRoute: 'login_screen',
+      routes: {
+        AppRoutes.loginScreenRouteName:(context) => LoginScreen(),
+        AppRoutes.registerScreenRouteName:(context) =>RegisterScreen() ,
+      },
+      locale: Locale(langProvider.appLanguage),
       localizationsDelegates: AppLocalizations.localizationsDelegates,
       supportedLocales: [
         Locale('en'), // English
