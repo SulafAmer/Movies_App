@@ -1,2 +1,22 @@
 {
+  "@@locale": "en",
+  "email": "Email",
+  "password": "Password",
+  "loginButton": "Login",
+  "forgetPassword": "Forget Password?",
+  "noAccount": "Don't Have Account?",
+  "createOne": "Create One",
+  "or": "OR",
+  "loginWithGoogle": "Login With Google",
+
+  "registerTitle": "Register",
+  "name": "Name",
+  "avatar": "Avatar",
+  "confirmPassword": "Confirm Password",
+  "phoneNumber": "Phone Number",
+  "createAccount": "Create Account",
+  "alreadyHaveAccount": "Already Have Account?",
+
+  "forgetPasswordTitle": "Forget Password",
+  "verifyEmailTitle": "Verify Email"
 }
