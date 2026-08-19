@@ -8,4 +8,5 @@ class AppColors {
   static Color greenColor = Color(0xff57AA53);
   static Color redColor = Color(0xffE82626);
   static Color transparentWhiteColor = Color(0x99FFFFFF);
+  static Color transparentBlackColor = Color(0xB5121312);
 }
