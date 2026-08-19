@@ -73,18 +73,22 @@ class HomeTab extends StatelessWidget {
               ),
               Image.asset(AppImages.watchNow),
 
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    AppLocalizations.of(context)!.action,
-                    style: AppStyles.regular20White,
-                  ),
-                  Text(
-                    AppLocalizations.of(context)!.see_more,
-                    style: AppStyles.regular16Yellow,
-                  ),
-                ],
+              Padding(
+                padding: EdgeInsets.symmetric(
+                    horizontal: context.scaleWidth(8)),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      AppLocalizations.of(context)!.action,
+                      style: AppStyles.regular20White,
+                    ),
+                    Text(
+                      AppLocalizations.of(context)!.see_more,
+                      style: AppStyles.regular16Yellow,
+                    ),
+                  ],
+                ),
               ),
 
               SizedBox(

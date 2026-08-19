@@ -57,7 +57,7 @@ class _BrowseTabState extends State<BrowseTab> {
                     crossAxisCount: 2,
                     mainAxisSpacing: context.scaleHeight(20),
                     crossAxisSpacing: context.scaleWidth(20),
-                    childAspectRatio: 2 / 2.5,
+                    childAspectRatio: 2 / 2.8,
                   ),
                   itemBuilder: (context, index) {
                     return FilmPosterWidget(
