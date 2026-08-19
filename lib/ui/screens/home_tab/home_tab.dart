@@ -49,17 +49,20 @@ class HomeTab extends StatelessWidget {
                           itemBuilder: (context, index, realIndex) {
                             return FilmPosterWidget(
                               borderRadius: 20,
-                              boxHeight: 351,
-                              boxWidth: 234,
+                              boxHeight: context.scaleHeight(351),
+                              boxWidth: context.scaleHeight(250),
                               filmImage: AppImages.film1917,
                               filmRate: "7.7",
+                              horizontalMargin: context.scaleWidth(6),
                             );
                           },
                           options: CarouselOptions(
                             enlargeCenterPage: true,
-                            enlargeFactor: 0.3,
-                            viewportFraction: 0.4,
+                            enlargeFactor: context.scaleHeight(0.34),
+                            viewportFraction: context.scaleWidth(0.62),
+                            height: context.scaleHeight(360),
                             initialPage: 0,
+
                             onPageChanged: (index, reason) {},
                           ),
                         ),
@@ -85,20 +88,24 @@ class HomeTab extends StatelessWidget {
               ),
 
               SizedBox(
-                height: context.scaleHeight(220),
+                height: context.scaleHeight(280),
                 child: ListView.separated(
                   itemCount: 5,
                   scrollDirection: Axis.horizontal,
                   separatorBuilder: (context, index) {
-                    return SizedBox(width: context.scaleWidth(15));
+                    return SizedBox(width: context.scaleWidth(9));
                   },
                   itemBuilder: (context, index) {
-                    return FilmPosterWidget(
-                      boxHeight: 220,
-                      boxWidth: 146,
-                      borderRadius: 20,
-                      filmImage: AppImages.film1917,
-                      filmRate: "7.7",
+                    return Padding(
+                      padding: EdgeInsets.symmetric(
+                          horizontal: context.scaleWidth(8)),
+                      child: FilmPosterWidget(
+                        boxHeight: context.scaleHeight(240),
+                        boxWidth: context.scaleWidth(200),
+                        borderRadius: 20,
+                        filmImage: AppImages.blackWidowFilm,
+                        filmRate: "7.7",
+                      ),
                     );
                   },
                 ),
