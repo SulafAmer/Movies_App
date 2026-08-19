@@ -18,6 +18,7 @@ class HomeTab extends StatelessWidget {
         height: context.scaleHeight(1000),
         child: SingleChildScrollView(
           child: Column(
+            spacing: context.scaleHeight(5),
             children: [
               Container(
                 decoration: BoxDecoration(
@@ -39,6 +40,8 @@ class HomeTab extends StatelessWidget {
                   ),
                   child: SafeArea(
                     child: Column(
+                      spacing: context.scaleHeight(10),
+
                       children: [
                         Image.asset(AppImages.availableNow),
                         CarouselSlider.builder(

@@ -3,7 +3,7 @@ import 'package:movies_app/l10n/app_localizations.dart';
 import 'package:movies_app/providers/app_language_provider.dart';
 import 'package:movies_app/ui/login/login_screen.dart';
 import 'package:movies_app/ui/login/register_screen.dart';
-import 'package:movies_app/ui/screens/home_tab/home_tab.dart';
+import 'package:movies_app/ui/screens/home_screen.dart';
 import 'package:movies_app/utils/app_routes.dart';
 import 'package:provider/provider.dart';
 
@@ -21,7 +21,7 @@ class MoviesApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       // initialRoute: 'login_screen',
-      home: HomeTab(),
+      home: HomeScreen(),
       routes: {
         AppRoutes.loginScreenRouteName:(context) => LoginScreen(),
         AppRoutes.registerScreenRouteName:(context) =>RegisterScreen() ,
