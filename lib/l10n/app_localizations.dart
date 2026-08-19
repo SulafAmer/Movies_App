@@ -199,6 +199,36 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Verify Email'**
   String get verifyEmailTitle;
+
+  /// No description provided for @action.
+  ///
+  /// In en, this message translates to:
+  /// **'Action'**
+  String get action;
+
+  /// No description provided for @see_more.
+  ///
+  /// In en, this message translates to:
+  /// **'See More'**
+  String get see_more;
+
+  /// No description provided for @adventure.
+  ///
+  /// In en, this message translates to:
+  /// **'Adventure'**
+  String get adventure;
+
+  /// No description provided for @animation.
+  ///
+  /// In en, this message translates to:
+  /// **'Animation'**
+  String get animation;
+
+  /// No description provided for @biography.
+  ///
+  /// In en, this message translates to:
+  /// **'Biography'**
+  String get biography;
 }
 
 class _AppLocalizationsDelegate

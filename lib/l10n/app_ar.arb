@@ -18,5 +18,10 @@
   "alreadyHaveAccount": "عندك حساب بالفعل؟",
 
   "forgetPasswordTitle": "نسيت كلمة المرور",
-  "verifyEmailTitle": "تأكيد البريد الإلكتروني"
+  "verifyEmailTitle": "تأكيد البريد الإلكتروني",
+  "action":"اكشن",
+    "see_more":"المزيد",
+    "adventure":"مغامرة",
+    "animation":"كارتون",
+    "biography":"سيرة"
 }

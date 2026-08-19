@@ -18,5 +18,11 @@
   "alreadyHaveAccount": "Already Have Account?",
 
   "forgetPasswordTitle": "Forget Password",
-  "verifyEmailTitle": "Verify Email"
+  "verifyEmailTitle": "Verify Email",
+  "action":"Action",
+  "see_more":"See More",
+  "adventure":"Adventure",
+  "animation":"Animation",
+  "biography":"Biography"
+
 }
