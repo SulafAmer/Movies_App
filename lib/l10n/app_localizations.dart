@@ -229,6 +229,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Biography'**
   String get biography;
+
+  /// No description provided for @searchTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Search'**
+  String get searchTitle;
+
+  /// No description provided for @searchHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Search'**
+  String get searchHint;
 }
 
 class _AppLocalizationsDelegate

@@ -23,5 +23,7 @@
     "see_more":"المزيد",
     "adventure":"مغامرة",
     "animation":"كارتون",
-    "biography":"سيرة"
+    "biography":"سيرة",
+    "searchTitle": "بحث",
+    "searchHint": "بحث"
 }
