@@ -40,10 +40,11 @@ class _SearchTabState extends State<SearchTab> {
             children: [
               SizedBox(height: context.scaleHeight(16)),
 
-              // شريط البحث (Search Bar)
               Container(
                 height: context.scaleHeight(52),
-                padding: EdgeInsets.symmetric(horizontal: context.scaleWidth(16)),
+                padding: EdgeInsets.symmetric(
+                  horizontal: context.scaleWidth(16),
+                ),
                 decoration: BoxDecoration(
                   color: AppColors.darkGrayColor,
                   borderRadius: BorderRadius.circular(context.scaleWidth(30)),
@@ -54,7 +55,10 @@ class _SearchTabState extends State<SearchTab> {
                       AppImages.searchIcon,
                       width: context.scaleWidth(20),
                       height: context.scaleWidth(20),
-                      colorFilter: ColorFilter.mode(AppColors.whiteColor, BlendMode.srcIn),
+                      colorFilter: ColorFilter.mode(
+                        AppColors.whiteColor,
+                        BlendMode.srcIn,
+                      ),
                     ),
                     SizedBox(width: context.scaleWidth(12)),
                     Expanded(
@@ -76,9 +80,10 @@ class _SearchTabState extends State<SearchTab> {
               ),
               SizedBox(height: context.scaleHeight(24)),
 
-              // المحتوى: لو مفيش بحث تظهر الصورة في المنتصف، لو فيه بحث تظهر شبكة الأفلام
               Expanded(
-                child: hasQuery ? _buildResultsGrid(context) : _buildEmptyState(context),
+                child: hasQuery
+                    ? _buildResultsGrid(context)
+                    : _buildEmptyState(context),
               ),
             ],
           ),
@@ -88,11 +93,7 @@ class _SearchTabState extends State<SearchTab> {
   }
 
   Widget _buildEmptyState(BuildContext context) {
-    return Center(
-      child: Image.asset(
-        AppImages.emptySearch,
-      ),
-    );
+    return Center(child: Image.asset(AppImages.emptySearch));
   }
 
   Widget _buildResultsGrid(BuildContext context) {
