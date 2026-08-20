@@ -9,6 +9,7 @@ class AppImages {
   static const String availableNow = 'assets/images/available_now.png';
   static const String blackWidowFilm = "assets/images/black_widow_film.png";
   static const String emptySearch = 'assets/images/Empty1.png';
+  static const String forgetPasswordImage='assets/images/forget_password.png';
 
   //icons
   static const String emailIcon='assets/icons/email_icon.svg';

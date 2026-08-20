@@ -72,9 +72,14 @@ class LoginScreen extends StatelessWidget {
                   Row(
                     children: [
                       Spacer(),
-                      Text(
-                        localeKeys.forgetPassword,
-                        style: AppStyles.regular14Yellow,
+                      TextButton(
+                        onPressed: () {
+                          Navigator.pushNamed(context, AppRoutes.forgetPasswordScreenRouteName);
+                        },
+                        child: Text(
+                          localeKeys.forgetPassword,
+                          style: AppStyles.regular14Yellow,
+                        ),
                       ),
                     ],
                   ),

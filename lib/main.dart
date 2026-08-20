@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:movies_app/l10n/app_localizations.dart';
 import 'package:movies_app/providers/app_language_provider.dart';
+import 'package:movies_app/ui/login/forget_password_screen.dart';
 import 'package:movies_app/ui/login/login_screen.dart';
 import 'package:movies_app/ui/login/register_screen.dart';
 import 'package:movies_app/ui/screens/home_screen.dart';
@@ -20,11 +21,12 @@ class MoviesApp extends StatelessWidget {
     var langProvider=Provider.of<AppLanguageProvider>(context);
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      // initialRoute: 'login_screen',
+       //initialRoute: 'login_screen',
       home: HomeScreen(),
       routes: {
         AppRoutes.loginScreenRouteName:(context) => LoginScreen(),
         AppRoutes.registerScreenRouteName:(context) =>RegisterScreen() ,
+        AppRoutes.forgetPasswordScreenRouteName:(context) => ForgetPasswordScreen()
       },
       locale: Locale(langProvider.appLanguage),
       localizationsDelegates: AppLocalizations.localizationsDelegates,
