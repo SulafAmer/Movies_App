@@ -1,6 +1,5 @@
 // ignore: unused_import
 import 'package:intl/intl.dart' as intl;
-
 import 'app_localizations.dart';
 
 // ignore_for_file: type=lint
@@ -74,4 +73,25 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get biography => 'سيرة';
+
+  @override
+  String get updateProfileTitle => 'تعديل الملف الشخصي';
+
+  @override
+  String get pickAvatarTitle => 'اختر الصورة الشخصية';
+
+  @override
+  String get resetPassword => 'إعادة تعيين كلمة المرور';
+
+  @override
+  String get deleteAccount => 'حذف الحساب';
+
+  @override
+  String get updateData => 'تحديث البيانات';
+
+  @override
+  String get deleteConfirmMessage => 'هل أنت متأكد من حذف حسابك؟';
+
+  @override
+  String get cancel => 'إلغاء';
 }

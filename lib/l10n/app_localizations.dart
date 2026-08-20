@@ -229,6 +229,48 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Biography'**
   String get biography;
+
+  /// No description provided for @updateProfileTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Update Profile'**
+  String get updateProfileTitle;
+
+  /// No description provided for @pickAvatarTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Pick Avatar'**
+  String get pickAvatarTitle;
+
+  /// No description provided for @resetPassword.
+  ///
+  /// In en, this message translates to:
+  /// **'Reset Password'**
+  String get resetPassword;
+
+  /// No description provided for @deleteAccount.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete Account'**
+  String get deleteAccount;
+
+  /// No description provided for @updateData.
+  ///
+  /// In en, this message translates to:
+  /// **'Update Data'**
+  String get updateData;
+
+  /// No description provided for @deleteConfirmMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Are you sure you want to delete your account?'**
+  String get deleteConfirmMessage;
+
+  /// No description provided for @cancel.
+  ///
+  /// In en, this message translates to:
+  /// **'Cancel'**
+  String get cancel;
 }
 
 class _AppLocalizationsDelegate

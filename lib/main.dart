@@ -7,6 +7,7 @@ import 'package:movies_app/ui/screens/home_screen.dart';
 import 'package:movies_app/utils/app_routes.dart';
 import 'package:provider/provider.dart';
 
+
 void main() {
   runApp(ChangeNotifierProvider(create: (BuildContext context) { return AppLanguageProvider(); },
   child: MoviesApp()));

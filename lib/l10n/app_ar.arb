@@ -23,5 +23,14 @@
     "see_more":"المزيد",
     "adventure":"مغامرة",
     "animation":"كارتون",
-    "biography":"سيرة"
+    "biography":"سيرة",
+
+
+  "updateProfileTitle": "تعديل الملف الشخصي",
+  "pickAvatarTitle": "اختر الصورة الشخصية",
+  "resetPassword": "إعادة تعيين كلمة المرور",
+  "deleteAccount": "حذف الحساب",
+  "updateData": "تحديث البيانات",
+  "deleteConfirmMessage": "هل أنت متأكد من حذف حسابك؟",
+  "cancel": "إلغاء"
 }
