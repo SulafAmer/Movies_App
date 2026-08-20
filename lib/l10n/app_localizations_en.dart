@@ -79,4 +79,26 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get searchHint => 'Search';
+
+  @override
+  String get updateProfileTitle => 'Update Profile';
+
+  @override
+  String get pickAvatarTitle => 'Pick Avatar';
+
+  @override
+  String get resetPassword => 'Reset Password';
+
+  @override
+  String get deleteAccount => 'Delete Account';
+
+  @override
+  String get updateData => 'Update Data';
+
+  @override
+  String get deleteConfirmMessage =>
+      'Are you sure you want to delete your account?';
+
+  @override
+  String get cancel => 'Cancel';
 }
