@@ -79,4 +79,25 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get searchHint => 'بحث';
+
+  @override
+  String get updateProfileTitle => 'تعديل الملف الشخصي';
+
+  @override
+  String get pickAvatarTitle => 'اختر الصورة الشخصية';
+
+  @override
+  String get resetPassword => 'إعادة تعيين كلمة المرور';
+
+  @override
+  String get deleteAccount => 'حذف الحساب';
+
+  @override
+  String get updateData => 'تحديث البيانات';
+
+  @override
+  String get deleteConfirmMessage => 'هل أنت متأكد من حذف حسابك؟';
+
+  @override
+  String get cancel => 'إلغاء';
 }

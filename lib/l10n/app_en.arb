@@ -25,6 +25,14 @@
   "animation":"Animation",
   "biography":"Biography",
   "searchTitle": "Search",
-  "searchHint": "Search"
+  "searchHint": "Search",
+  "updateProfileTitle": "Update Profile",
+  "pickAvatarTitle": "Pick Avatar",
+  "resetPassword": "Reset Password",
+  "deleteAccount": "Delete Account",
+  "updateData": "Update Data",
+  "deleteConfirmMessage": "Are you sure you want to delete your account?",
+  "cancel": "Cancel"
+
 
 }
