@@ -5,6 +5,7 @@ import 'package:movies_app/ui/screens/home_tab/home_tab.dart';
 import 'package:movies_app/utils/app_colors.dart';
 import 'package:movies_app/utils/app_images.dart';
 import 'package:movies_app/utils/size_utils.dart';
+import 'package:movies_app/ui/screens/search_tab/search_tab.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -15,7 +16,7 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   int selectedIndex = 0;
-  List<Widget> tabs = [HomeTab(), BrowseTab(), HomeTab(), BrowseTab()];
+  List<Widget> tabs = [HomeTab(), SearchTab(), HomeTab(), BrowseTab()];
 
   List<String> bottomNavBarTabs = [
     AppImages.homeIcon,

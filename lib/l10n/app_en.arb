@@ -23,6 +23,8 @@
   "see_more":"See More",
   "adventure":"Adventure",
   "animation":"Animation",
-  "biography":"Biography"
+  "biography":"Biography",
+  "searchTitle": "Search",
+  "searchHint": "Search"
 
 }

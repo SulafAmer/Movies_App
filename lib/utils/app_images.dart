@@ -8,6 +8,7 @@ class AppImages {
   static const String watchNow = 'assets/images/watch_now.png';
   static const String availableNow = 'assets/images/available_now.png';
   static const String blackWidowFilm = "assets/images/black_widow_film.png";
+  static const String emptySearch = 'assets/images/Empty1.png';
 
   //icons
   static const String emailIcon='assets/icons/email_icon.svg';
