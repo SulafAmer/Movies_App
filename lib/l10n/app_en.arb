@@ -19,11 +19,11 @@
 
   "forgetPasswordTitle": "Forget Password",
   "verifyEmailTitle": "Verify Email",
-  "action":"Action",
-  "see_more":"See More",
-  "adventure":"Adventure",
-  "animation":"Animation",
-  "biography":"Biography",
+  "action": "Action",
+  "see_more": "See More",
+  "adventure": "Adventure",
+  "animation": "Animation",
+  "biography": "Biography",
   "searchTitle": "Search",
   "searchHint": "Search",
   "updateProfileTitle": "Update Profile",
@@ -32,7 +32,10 @@
   "deleteAccount": "Delete Account",
   "updateData": "Update Data",
   "deleteConfirmMessage": "Are you sure you want to delete your account?",
-  "cancel": "Cancel"
-
-
+  "cancel": "Cancel",
+  "editProfile": "Edit Profile",
+  "exit": "Exit",
+  "wishList": "Wish List",
+  "watchList": "Watch List",
+  "history": "History"
 }

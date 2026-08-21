@@ -19,11 +19,11 @@
 
   "forgetPasswordTitle": "نسيت كلمة المرور",
   "verifyEmailTitle": "تأكيد البريد الإلكتروني",
-  "action":"اكشن",
-  "see_more":"المزيد",
-  "adventure":"مغامرة",
-  "animation":"كارتون",
-  "biography":"سيرة",
+  "action": "اكشن",
+  "see_more": "المزيد",
+  "adventure": "مغامرة",
+  "animation": "كارتون",
+  "biography": "سيرة",
   "searchTitle": "بحث",
   "searchHint": "بحث",
   "updateProfileTitle": "تعديل الملف الشخصي",
@@ -32,6 +32,10 @@
   "deleteAccount": "حذف الحساب",
   "updateData": "تحديث البيانات",
   "deleteConfirmMessage": "هل أنت متأكد من حذف حسابك؟",
-  "cancel": "إلغاء"
-
+  "cancel": "إلغاء",
+  "editProfile": "تعديل الملف الشخصي",
+  "exit": "خروج",
+  "wishList": "قائمة الرغبات",
+  "watchList": "قائمة المشاهدة",
+  "history": "السجل"
 }

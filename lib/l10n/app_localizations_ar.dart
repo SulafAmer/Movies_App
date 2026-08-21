@@ -100,4 +100,19 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get cancel => 'إلغاء';
+
+  @override
+  String get editProfile => 'تعديل الملف الشخصي';
+
+  @override
+  String get exit => 'خروج';
+
+  @override
+  String get wishList => 'قائمة الرغبات';
+
+  @override
+  String get watchList => 'قائمة المشاهدة';
+
+  @override
+  String get history => 'السجل';
 }
