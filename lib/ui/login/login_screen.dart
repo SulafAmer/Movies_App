@@ -88,7 +88,9 @@ class LoginScreen extends StatelessWidget {
                     child: SizedBox(
                       height: context.scaleHeight(56),
                       child: ElevatedButtonWidget(
-                        onTab: onLogin,
+                        onTab: () {
+                          onLogin(context);
+                        },
                         buttonText: localeKeys.loginButton,
                       ),
                     ),
@@ -171,7 +173,9 @@ class LoginScreen extends StatelessWidget {
     );
   }
 
-  void onLogin() {}
+  void onLogin(BuildContext context) {
+    Navigator.of(context).pushNamed(AppRoutes.homeScreenRouteName);
+  }
 
   void onLoginWithGoogle() {}
 }

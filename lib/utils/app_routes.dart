@@ -4,4 +4,5 @@ class AppRoutes {
   static const String homeScreenRouteName = "home_screen";
   static const String forgetPasswordScreenRouteName = "forget_password_screen";
   static const String movieDetailsScreenRouteName = "movie_details_screen";
+  static const String updateProfileScreenRouteName = "update_profile_screen";
 }

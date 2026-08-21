@@ -3,6 +3,7 @@ import 'package:movies_app/l10n/app_localizations.dart';
 import 'package:movies_app/ui/widgets/film_poster_widget.dart';
 import 'package:movies_app/utils/app_colors.dart';
 import 'package:movies_app/utils/app_images.dart';
+import 'package:movies_app/utils/app_routes.dart';
 import 'package:movies_app/utils/app_styles.dart';
 import 'package:movies_app/utils/size_utils.dart';
 
@@ -129,7 +130,10 @@ class _ProfileTabState extends State<ProfileTab> {
           child: SizedBox(
             height: context.scaleHeight(55),
             child: ElevatedButton(
-              onPressed: () {},
+              onPressed: () {
+                Navigator.of(context).pushNamed(
+                    AppRoutes.updateProfileScreenRouteName);
+              },
               style: ElevatedButton.styleFrom(
                 elevation: 0,
                 backgroundColor: AppColors.yellowColor,
