@@ -4,14 +4,11 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:movies_app/l10n/app_localizations.dart';
 import 'package:movies_app/ui/login/widgets/elevated_button_widget.dart';
 import 'package:movies_app/ui/login/widgets/langauge_toggle.dart';
-import 'package:movies_app/ui/login/widgets/outlined_button_widget.dart';
 import 'package:movies_app/ui/login/widgets/text_field_widget.dart';
 import 'package:movies_app/utils/app_colors.dart';
 import 'package:movies_app/utils/app_images.dart';
 import 'package:movies_app/utils/app_styles.dart';
-import 'package:provider/provider.dart';
 
-import '../../providers/app_language_provider.dart';
 import '../../utils/app_routes.dart';
 import '../../utils/size_utils.dart';
 
@@ -172,7 +169,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     child: SizedBox(
                       height: context.scaleHeight(56),
                       child: ElevatedButtonWidget(
-                        onTab: onCreatAccount,
+                        onTab: () {
+                          onCreatAccount(context);
+                        },
                         buttonText: localeKeys.createAccount,
                       ),
                     ),
@@ -211,5 +210,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
     );
   }
 
-  void onCreatAccount() {}
+  void onCreatAccount(BuildContext context) {
+    Navigator.of(context).pushNamed(AppRoutes.homeScreenRouteName);
+  }
 }
