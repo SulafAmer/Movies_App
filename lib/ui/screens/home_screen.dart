@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:movies_app/ui/screens/browse_tab/browse_tab.dart';
 import 'package:movies_app/ui/screens/home_tab/home_tab.dart';
 import 'package:movies_app/ui/screens/profile_tab/profile_tab.dart';
 import 'package:movies_app/utils/app_colors.dart';
