@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:movies_app/ui/screens/browse_tab/browse_tab.dart';
 import 'package:movies_app/ui/screens/home_tab/home_tab.dart';
+import 'package:movies_app/ui/screens/profile_tab/profile_tab.dart';
 import 'package:movies_app/utils/app_colors.dart';
 import 'package:movies_app/utils/app_images.dart';
 import 'package:movies_app/utils/size_utils.dart';
@@ -15,7 +16,7 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   int selectedIndex = 0;
-  List<Widget> tabs = [HomeTab(), BrowseTab(), HomeTab(), BrowseTab()];
+  List<Widget> tabs = [HomeTab(), BrowseTab(), HomeTab(), const ProfileTab()];
 
   List<String> bottomNavBarTabs = [
     AppImages.homeIcon,

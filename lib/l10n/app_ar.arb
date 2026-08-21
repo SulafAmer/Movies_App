@@ -23,5 +23,10 @@
     "see_more":"المزيد",
     "adventure":"مغامرة",
     "animation":"كارتون",
-    "biography":"سيرة"
+    "biography":"سيرة",
+    "editProfile": "تعديل الملف الشخصي",
+    "exit": "خروج",
+    "wishList": "قائمة الرغبات",
+    "watchList": "قائمة المشاهدة",
+    "history": "السجل"
 }

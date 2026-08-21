@@ -229,6 +229,36 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Biography'**
   String get biography;
+
+  /// No description provided for @editProfile.
+  ///
+  /// In en, this message translates to:
+  /// **'Edit Profile'**
+  String get editProfile;
+
+  /// No description provided for @exit.
+  ///
+  /// In en, this message translates to:
+  /// **'Exit'**
+  String get exit;
+
+  /// No description provided for @wishList.
+  ///
+  /// In en, this message translates to:
+  /// **'Wish List'**
+  String get wishList;
+
+  /// No description provided for @watchList.
+  ///
+  /// In en, this message translates to:
+  /// **'Watch List'**
+  String get watchList;
+
+  /// No description provided for @history.
+  ///
+  /// In en, this message translates to:
+  /// **'History'**
+  String get history;
 }
 
 class _AppLocalizationsDelegate
