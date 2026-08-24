@@ -83,7 +83,7 @@ class LoginScreen extends StatelessWidget {
                       ),
                     ],
                   ),
-                  SizedBox(height: context.scaleHeight(48)),
+                  SizedBox(height: context.scaleHeight(25)),
                   Center(
                     child: SizedBox(
                       height: context.scaleHeight(56),
