@@ -313,6 +313,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'History'**
   String get history;
+
+  /// No description provided for @family.
+  ///
+  /// In en, this message translates to:
+  /// **'Family'**
+  String get family;
+
+  /// No description provided for @drama.
+  ///
+  /// In en, this message translates to:
+  /// **'Drama'**
+  String get drama;
 }
 
 class _AppLocalizationsDelegate

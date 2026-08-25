@@ -116,4 +116,10 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get history => 'History';
+
+  @override
+  String get family => 'Family';
+
+  @override
+  String get drama => 'Drama';
 }

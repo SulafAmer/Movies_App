@@ -115,4 +115,10 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get history => 'السجل';
+
+  @override
+  String get family => 'عائلي';
+
+  @override
+  String get drama => 'دراما';
 }
