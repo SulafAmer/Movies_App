@@ -1,11 +1,17 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
-import 'package:movies_app/l10n/app_localizations.dart';
-import 'package:movies_app/ui/widgets/film_poster_widget.dart';
-import 'package:movies_app/utils/app_colors.dart';
-import 'package:movies_app/utils/app_images.dart';
-import 'package:movies_app/utils/app_styles.dart';
-import 'package:movies_app/utils/size_utils.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
+import '../../../l10n/app_localizations.dart';
+import '../../../utils/app_colors.dart';
+import '../../../utils/app_images.dart';
+import '../../../utils/size_utils.dart';
+import '../../widgets/film_poster_widget.dart';
+import '../../widgets/main_error_widget.dart';
+import '../../widgets/main_loading_widget.dart';
+import '../../widgets/movie_section.dart';
+import 'cubit/movies_states.dart';
+import 'cubit/movies_view_model.dart';
 
 class HomeTab extends StatelessWidget {
   const HomeTab({super.key});
@@ -14,109 +20,106 @@ class HomeTab extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.blackColor,
-      body: Container(
-        height: context.scaleHeight(1000),
-        child: SingleChildScrollView(
-          child: Column(
-            spacing: context.scaleHeight(5),
-            children: [
-              Container(
-                decoration: BoxDecoration(
-                  image: DecorationImage(
-                    image: AssetImage(AppImages.film1917),
-                    fit: BoxFit.fill,
-                  ),
-                ),
-                child: Container(
-                  decoration: BoxDecoration(
-                    gradient: LinearGradient(
-                      colors: [
-                        AppColors.transparentBlackColor,
-                        AppColors.blackColor,
-                      ],
-                      end: AlignmentGeometry.bottomCenter,
-                      begin: AlignmentGeometry.topCenter,
-                    ),
-                  ),
-                  child: SafeArea(
-                    child: Column(
-                      spacing: context.scaleHeight(10),
-
-                      children: [
-                        Image.asset(AppImages.availableNow),
-                        CarouselSlider.builder(
-                          itemCount: 3,
-                          itemBuilder: (context, index, realIndex) {
-                            return FilmPosterWidget(
-                              borderRadius: 20,
-                              boxHeight: context.scaleHeight(351),
-                              boxWidth: context.scaleHeight(250),
-                              filmImage: AppImages.film1917,
-                              filmRate: "7.7",
-                              horizontalMargin: context.scaleWidth(6),
-                            );
-                          },
-                          options: CarouselOptions(
-                            enlargeCenterPage: true,
-                            enlargeFactor: context.scaleHeight(0.34),
-                            viewportFraction: context.scaleWidth(0.62),
-                            height: context.scaleHeight(360),
-                            initialPage: 0,
-
-                            onPageChanged: (index, reason) {},
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-              ),
-              Image.asset(AppImages.watchNow),
-
-              Padding(
-                padding: EdgeInsets.symmetric(
-                    horizontal: context.scaleWidth(8)),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      AppLocalizations.of(context)!.action,
-                      style: AppStyles.regular20White,
-                    ),
-                    Text(
-                      AppLocalizations.of(context)!.see_more,
-                      style: AppStyles.regular16Yellow,
-                    ),
-                  ],
-                ),
-              ),
-
-              SizedBox(
-                height: context.scaleHeight(280),
-                child: ListView.separated(
-                  itemCount: 5,
-                  scrollDirection: Axis.horizontal,
-                  separatorBuilder: (context, index) {
-                    return SizedBox(width: context.scaleWidth(9));
-                  },
-                  itemBuilder: (context, index) {
-                    return Padding(
-                      padding: EdgeInsets.symmetric(
-                          horizontal: context.scaleWidth(8)),
-                      child: FilmPosterWidget(
-                        boxHeight: context.scaleHeight(240),
-                        boxWidth: context.scaleWidth(200),
-                        borderRadius: 20,
-                        filmImage: AppImages.blackWidowFilm,
-                        filmRate: "7.7",
+      body: BlocBuilder<MoviesViewModel, MoviesStates>(
+        builder: (context, state) {
+          if (state is MovieSuccessState) {
+            return SingleChildScrollView(
+              child: Column(
+                spacing: context.scaleHeight(5),
+                children: [
+                  Container(
+                    decoration: BoxDecoration(
+                      image: DecorationImage(
+                        image: AssetImage(AppImages.film1917),
+                        fit: BoxFit.fill,
                       ),
-                    );
-                  },
-                ),
+                    ),
+                    child: Container(
+                      decoration: BoxDecoration(
+                        gradient: LinearGradient(
+                          colors: [
+                            AppColors.transparentBlackColor,
+                            AppColors.blackColor,
+                          ],
+                          begin: Alignment.topCenter,
+                          end: Alignment.bottomCenter,
+                        ),
+                      ),
+                      child: SafeArea(
+                        child: Column(
+                          spacing: context.scaleHeight(10),
+                          children: [
+                            Image.asset(AppImages.availableNow),
+
+                            CarouselSlider.builder(
+                              itemCount:
+                              state.availableNowMovies.length,
+                              itemBuilder:
+                                  (context, index, realIndex) {
+                                final movie =
+                                state.availableNowMovies[index];
+
+                                return FilmPosterWidget(
+                                  borderRadius: 20,
+                                  boxHeight: 351,
+                                  boxWidth: 200,
+                                  filmImage:
+                                  movie.mediumCoverImage,
+                                  filmRate:
+                                  movie.rating.toStringAsFixed(1),
+                                  horizontalMargin: 6,
+                                );
+                              },
+                              options: CarouselOptions(
+                                enlargeCenterPage: true,
+                                enlargeFactor: 0.34,
+                                viewportFraction: 0.62,
+                                height:
+                                context.scaleHeight(360),
+                                initialPage: 0,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+
+                  Image.asset(AppImages.watchNow),
+
+                  MovieSection(
+                    title:
+                    AppLocalizations.of(context)!.family,
+                    movies: state.familyMovies,
+                  ),
+
+                  MovieSection(
+                    title:
+                    AppLocalizations.of(context)!.drama,
+                    movies: state.dramaMovies,
+                  ),
+
+                  SizedBox(
+                    height: context.scaleHeight(15),
+                  ),
+                ],
               ),
-            ],
-          ),
-        ),
+            );
+          }
+
+          if (state is MovieErrorState) {
+            return MainErrorWidget(
+              errorMesaage: state.errorMessage,
+              onPressed: () {
+                context
+                    .read<MoviesViewModel>()
+                    .getMovies();
+              },
+            );
+          }
+
+          return const MainLoadingWidget();
+        },
       ),
     );
   }
