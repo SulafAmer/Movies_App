@@ -32,8 +32,8 @@ class MoviesViewModel extends Cubit<MoviesStates> {
         emit(
           MovieSuccessState(
             availableNowMovies: randomMoviesResponse.movies,
-            genre1Movies: familyMoviesResponse.movies,
-            genre2Movies: dramaMoviesResponse.movies,
+            familyMovies: familyMoviesResponse.movies,
+            dramaMovies: dramaMoviesResponse.movies,
           ),
         );
       } else {

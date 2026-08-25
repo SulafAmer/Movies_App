@@ -8,13 +8,13 @@ class MovieErrorState extends MoviesStates{
 }
 class MovieSuccessState extends MoviesStates{
   final List<Movie>availableNowMovies;
-  final List <Movie>genre1Movies;
-  final List <Movie>genre2Movies;
+  final List <Movie>dramaMovies;
+  final List <Movie>familyMovies;
 
   MovieSuccessState({
     required this.availableNowMovies,
-    required this.genre1Movies,
-    required this.genre2Movies
+    required this.dramaMovies,
+    required this.familyMovies
   });
 }
 
