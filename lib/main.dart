@@ -23,8 +23,7 @@ class MoviesApp extends StatelessWidget {
     var langProvider=Provider.of<AppLanguageProvider>(context);
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      // initialRoute: 'login_screen',
-      home: MovieDetailsScreen(),
+      initialRoute: 'home_screen',
       routes: {
         AppRoutes.loginScreenRouteName:(context) => LoginScreen(),
         AppRoutes.registerScreenRouteName:(context) =>RegisterScreen() ,

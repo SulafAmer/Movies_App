@@ -135,4 +135,8 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get genres => 'Genres';
+  String get family => 'Family';
+
+  @override
+  String get drama => 'Drama';
 }
