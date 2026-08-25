@@ -38,6 +38,16 @@
   "wishList": "Wish List",
   "watchList": "Watch List",
   "history": "History",
+  "watch":"watch",
+  "screen_shots":"Screen Shots",
+  "similar":"Similar",
+  "summary":"Summary",
+  "cast":"Cast",
+  "genres":"Genres"
+
+
+
+
   "family": "Family",
   "drama": "Drama"
 }

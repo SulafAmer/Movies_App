@@ -38,6 +38,13 @@
   "wishList": "قائمة الرغبات",
   "watchList": "قائمة المشاهدة",
   "history": "السجل",
+  "watch":"شاهد",
+  "screen_shots":"لقطات",
+    "similar":"مشابه",
+    "summary":"ملخص",
+    "cast":"طاقم العمل",
+    "genres":"التصنيف"
+
   "family": "عائلي",
   "drama": "دراما"
 }

@@ -15,6 +15,11 @@ class AppStyles {
     color: AppColors.blackColor,
     fontWeight: FontWeight.w700,
   );
+  static TextStyle bold20Grey = GoogleFonts.roboto(
+    fontSize: 20,
+    color: AppColors.greyColor,
+    fontWeight: FontWeight.w700,
+  );
 
   static TextStyle semi20Black = GoogleFonts.roboto(
     fontSize: 20,
@@ -31,6 +36,11 @@ class AppStyles {
   static TextStyle regular16White = GoogleFonts.roboto(
     fontSize: 16,
     color: AppColors.whiteColor,
+    fontWeight: FontWeight.normal,
+  );
+  static TextStyle regular16lightGrey = GoogleFonts.roboto(
+    fontSize: 16,
+    color: AppColors.transparentWhiteColor,
     fontWeight: FontWeight.normal,
   );
 

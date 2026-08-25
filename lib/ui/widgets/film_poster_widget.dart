@@ -5,12 +5,14 @@ import 'package:movies_app/utils/app_styles.dart';
 import 'package:movies_app/utils/size_utils.dart';
 
 class FilmPosterWidget extends StatelessWidget {
-  final double boxHeight;
-  final double boxWidth;
-  final double borderRadius;
-  final String filmImage;
-  final String filmRate;
-  final double? horizontalMargin;
+  double boxHeight;
+  double boxWidth;
+  double borderRadius;
+  String filmImage;
+  String filmRate;
+  double? horizontalMargin;
+  double? verticaMargin;
+
 
   const FilmPosterWidget({
     super.key,
@@ -20,14 +22,16 @@ class FilmPosterWidget extends StatelessWidget {
     required this.filmImage,
     required this.filmRate,
     this.horizontalMargin,
+    this.verticaMargin,
+
   });
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.symmetric(
-        horizontal: horizontalMargin ?? 0,
-      ),
+      margin: EdgeInsets.symmetric(horizontal: horizontalMargin ?? 0,
+          vertical: verticaMargin ?? 0),
+      alignment: AlignmentDirectional.topStart,
       height: context.scaleHeight(boxHeight),
       width: context.scaleWidth(boxWidth),
       child: ClipRRect(
