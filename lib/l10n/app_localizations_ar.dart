@@ -1,5 +1,6 @@
 // ignore: unused_import
 import 'package:intl/intl.dart' as intl;
+
 import 'app_localizations.dart';
 
 // ignore_for_file: type=lint
@@ -115,4 +116,22 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get history => 'السجل';
+
+  @override
+  String get watch => 'شاهد';
+
+  @override
+  String get screen_shots => 'لقطات';
+
+  @override
+  String get similar => 'مشابه';
+
+  @override
+  String get summary => 'ملخص';
+
+  @override
+  String get cast => 'طاقم العمل';
+
+  @override
+  String get genres => 'التصنيف';
 }

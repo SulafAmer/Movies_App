@@ -10,6 +10,8 @@ class FilmPosterWidget extends StatelessWidget {
   String filmImage;
   String filmRate;
   double? horizontalMargin;
+  double? verticaMargin;
+
 
   FilmPosterWidget({
     required this.boxHeight,
@@ -17,13 +19,16 @@ class FilmPosterWidget extends StatelessWidget {
     required this.borderRadius,
     required this.filmImage,
     required this.filmRate,
-    this.horizontalMargin
+    this.horizontalMargin,
+    this.verticaMargin,
+
   });
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.symmetric(horizontal: horizontalMargin ?? 0),
+      margin: EdgeInsets.symmetric(horizontal: horizontalMargin ?? 0,
+          vertical: verticaMargin ?? 0),
       alignment: AlignmentDirectional.topStart,
       height: context.scaleHeight(boxHeight),
       width: context.scaleWidth(boxWidth),

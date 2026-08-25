@@ -5,6 +5,7 @@ import 'package:movies_app/ui/login/forget_password_screen.dart';
 import 'package:movies_app/ui/login/login_screen.dart';
 import 'package:movies_app/ui/login/register_screen.dart';
 import 'package:movies_app/ui/screens/home_screen.dart';
+import 'package:movies_app/ui/screens/movie_details/movie_details_screen.dart';
 import 'package:movies_app/ui/screens/profile/update_profile_screen.dart';
 import 'package:movies_app/utils/app_routes.dart';
 import 'package:provider/provider.dart';
@@ -22,7 +23,8 @@ class MoviesApp extends StatelessWidget {
     var langProvider=Provider.of<AppLanguageProvider>(context);
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      initialRoute: 'login_screen',
+      // initialRoute: 'login_screen',
+      home: MovieDetailsScreen(),
       routes: {
         AppRoutes.loginScreenRouteName:(context) => LoginScreen(),
         AppRoutes.registerScreenRouteName:(context) =>RegisterScreen() ,
