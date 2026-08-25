@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:movies_app/ui/screens/browse_tab/browse_tab.dart';
+import 'package:movies_app/ui/screens/home_tab/cubit/movies_view_model.dart';
 import 'package:movies_app/ui/screens/home_tab/home_tab.dart';
 import 'package:movies_app/ui/screens/profile_tab/profile_tab.dart';
 import 'package:movies_app/ui/screens/search_tab/search_tab.dart';
@@ -19,8 +21,12 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   int selectedIndex = 0;
 
+
   List<Widget> tabs = [
-    HomeTab(),
+    //..getMovies() instead of => MoviesViewModel viewModel; viewModel.getMovies;
+
+    BlocProvider(create:(context) => MoviesViewModel()..getMovies(),
+    child: HomeTab()),
     SearchTab(),
     BrowseTab(),
     const ProfileTab(),
