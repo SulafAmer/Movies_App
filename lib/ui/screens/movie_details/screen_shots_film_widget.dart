@@ -8,17 +8,17 @@ class ScreenShotsFilmWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.symmetric(
+    return Container(
+      height: context.scaleHeight(160),
+      margin: EdgeInsets.symmetric(
         horizontal: context.scaleWidth(15),
         vertical: context.scaleHeight(15),
       ),
-      child: Container(
-        height: context.scaleHeight(160),
-        clipBehavior: Clip.antiAlias,
-        decoration: BoxDecoration(borderRadius: BorderRadius.circular(16)),
-        child: Image.asset(image, fit: BoxFit.fill),
+      clipBehavior: Clip.antiAlias,
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(16),
       ),
+      child: Image.asset(image, fit: BoxFit.fill),
     );
   }
 }

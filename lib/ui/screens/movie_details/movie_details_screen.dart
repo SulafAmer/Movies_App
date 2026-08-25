@@ -105,7 +105,8 @@ class MovieDetailsScreen extends StatelessWidget {
               ),
             ),
             Padding(
-              padding: EdgeInsets.symmetric(horizontal: context.scaleWidth(15)),
+              padding: EdgeInsets.symmetric(horizontal: context.scaleWidth(15),
+                  vertical: context.scaleHeight(10)),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -131,15 +132,17 @@ class MovieDetailsScreen extends StatelessWidget {
               ),
             ),
             Padding(
-              padding: EdgeInsets.symmetric(horizontal: context.scaleWidth(15)),
+              padding: EdgeInsets.symmetric(horizontal: context.scaleWidth(15),
+                  vertical: context.scaleHeight(10)),
               child: Text(
                 AppLocalizations.of(context)!.screen_shots,
                 style: AppStyles.bold24White,
               ),
             ),
             Container(
-              height: context.scaleHeight(600),
+              height: context.scaleHeight(560),
               child: ListView.builder(
+                padding: EdgeInsets.all(0),
                 physics: NeverScrollableScrollPhysics(),
                 itemCount: 3,
                 itemBuilder: (context, index) {
@@ -148,15 +151,17 @@ class MovieDetailsScreen extends StatelessWidget {
               ),
             ),
             Padding(
-              padding: EdgeInsets.symmetric(horizontal: context.scaleWidth(15)),
+              padding: EdgeInsets.symmetric(horizontal: context.scaleWidth(15),
+                  vertical: context.scaleHeight(10)),
               child: Text(
                 AppLocalizations.of(context)!.similar,
                 style: AppStyles.bold24White,
               ),
             ),
             Container(
-              height: context.scaleHeight(600),
+              height: context.scaleHeight(540),
               child: GridView.builder(
+                padding: EdgeInsets.all(0),
                 physics: NeverScrollableScrollPhysics(),
                 itemCount: 3,
                 itemBuilder: (context, index) {
@@ -177,7 +182,8 @@ class MovieDetailsScreen extends StatelessWidget {
               ),
             ),
             Padding(
-              padding: EdgeInsets.symmetric(horizontal: context.scaleWidth(15)),
+              padding: EdgeInsets.symmetric(horizontal: context.scaleWidth(15),
+                  vertical: context.scaleHeight(10)),
               child: Text(
                 AppLocalizations.of(context)!.summary,
                 style: AppStyles.bold24White,
@@ -192,15 +198,17 @@ class MovieDetailsScreen extends StatelessWidget {
             ),
 
             Padding(
-              padding: EdgeInsets.symmetric(horizontal: context.scaleWidth(15)),
+              padding: EdgeInsets.symmetric(horizontal: context.scaleWidth(15),
+                  vertical: context.scaleHeight(25)),
               child: Text(
                 AppLocalizations.of(context)!.cast,
                 style: AppStyles.bold24White,
               ),
             ),
             Container(
-              height: context.scaleHeight(670),
+              height: context.scaleHeight(620),
               child: ListView.separated(
+                padding: EdgeInsets.all(0),
                 separatorBuilder: (context, index) {
                   return SizedBox(height: context.scaleHeight(10));
                 },
@@ -263,15 +271,17 @@ class MovieDetailsScreen extends StatelessWidget {
 
             /////////////////////////////
             Padding(
-              padding: EdgeInsets.symmetric(horizontal: context.scaleWidth(15)),
+              padding: EdgeInsets.symmetric(horizontal: context.scaleWidth(15),
+                  vertical: context.scaleHeight(10)),
               child: Text(
                 AppLocalizations.of(context)!.genres,
                 style: AppStyles.bold24White,
               ),
             ),
             Container(
-              height: context.scaleHeight(200),
+              height: context.scaleHeight(150),
               child: GridView.builder(
+                padding: EdgeInsets.all(0),
                 physics: NeverScrollableScrollPhysics(),
                 itemCount: 5,
                 itemBuilder: (context, index) {
