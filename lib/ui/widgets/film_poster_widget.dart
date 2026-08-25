@@ -14,7 +14,7 @@ class FilmPosterWidget extends StatelessWidget {
   double? verticaMargin;
 
 
-  const FilmPosterWidget({
+  FilmPosterWidget({
     super.key,
     required this.boxHeight,
     required this.boxWidth,
