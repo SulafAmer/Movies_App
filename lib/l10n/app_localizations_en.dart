@@ -139,4 +139,83 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get drama => 'Drama';
+
+  @override
+  String get please_enter_email => 'Please Enter Your Email';
+
+  @override
+  String get please_enter_valid_email => 'Please Enter a Valid Email';
+
+  @override
+  String get please_enter_password => 'Please Enter Your Password';
+
+  @override
+  String get password_too_short => 'Password Must Be At Least 6 Characters';
+
+  @override
+  String get please_enter_name => 'Please Enter Your Name';
+
+  @override
+  String get please_enter_confirm_password => 'Please Confirm Your Password';
+
+  @override
+  String get passwords_do_not_match => 'Passwords Do Not Match';
+
+  @override
+  String get password_min_length => 'Please Enter At Least 6 Characters';
+
+  @override
+  String get delete => 'Delete';
+
+  @override
+  String get loading => 'Loading...';
+
+  @override
+  String get ok => 'Ok';
+
+  @override
+  String get success => 'Success';
+
+  @override
+  String get error => 'Error';
+
+  @override
+  String get waiting => 'Waiting...';
+
+  @override
+  String get something_went_wrong => 'Something went wrong.';
+
+  @override
+  String get registered_successfully => 'Registered Successfully';
+
+  @override
+  String get email_already_registered => 'This email is already registered.';
+
+  @override
+  String get weak_password => 'The password provided is too weak.';
+
+  @override
+  String get invalid_email => 'Invalid email address.';
+
+  @override
+  String get registration_disabled => 'Registration is currently disabled.';
+
+  @override
+  String get login_successfully => 'Login Successfully';
+
+  @override
+  String get user_not_found => 'No user found for that email.';
+
+  @override
+  String get wrong_password => 'Wrong password provided for that user.';
+
+  @override
+  String get invalid_credential => 'Incorrect email or password.';
+
+  @override
+  String get could_not_get_user_information =>
+      'Could not get user information.';
+
+  @override
+  String get network_error => 'Network Error!';
 }

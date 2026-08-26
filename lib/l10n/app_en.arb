@@ -49,5 +49,33 @@
 
 
   "family": "Family",
-  "drama": "Drama"
+  "drama": "Drama",
+  "please_enter_email": "Please Enter Your Email",
+  "please_enter_valid_email": "Please Enter a Valid Email",
+  "please_enter_password": "Please Enter Your Password",
+  "password_too_short": "Password Must Be At Least 6 Characters",
+  "please_enter_name": "Please Enter Your Name",
+  "please_enter_confirm_password": "Please Confirm Your Password",
+  "passwords_do_not_match": "Passwords Do Not Match",
+  "password_min_length": "Please Enter At Least 6 Characters",
+  "delete": "Delete",
+  "loading": "Loading...",
+  "ok": "Ok",
+  "success": "Success",
+  "error": "Error",
+  "waiting": "Waiting...",
+  "something_went_wrong": "Something went wrong.",
+  "registered_successfully": "Registered Successfully",
+  "email_already_registered": "This email is already registered.",
+  "weak_password": "The password provided is too weak.",
+  "invalid_email": "Invalid email address.",
+  "registration_disabled": "Registration is currently disabled.",
+  "login_successfully": "Login Successfully",
+  "user_not_found": "No user found for that email.",
+  "wrong_password": "Wrong password provided for that user.",
+  "invalid_credential": "Incorrect email or password.",
+  "could_not_get_user_information": "Could not get user information.",
+  "network_error": "Network Error!"
+
+
 }

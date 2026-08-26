@@ -20,6 +20,7 @@ class TextFieldWidget extends StatelessWidget {
   final double? prefixWidth;
   final double? suffixHeight;
   final double? suffixWidth;
+   bool? obscure;
 
   TextFieldWidget({
     super.key,
@@ -35,6 +36,7 @@ class TextFieldWidget extends StatelessWidget {
     this.prefixWidth,
     this.suffixHeight,
     this.suffixWidth,
+    this.obscure
   });
 
   @override
@@ -43,6 +45,9 @@ class TextFieldWidget extends StatelessWidget {
       controller: controller,
       onChanged: onChanged,
       validator: validator,
+      style:AppStyles.regular16White,
+      obscureText: obscure??false,
+
       maxLines: lines ?? 1,
       decoration: InputDecoration(
         fillColor: AppColors.darkGrayColor,
@@ -63,7 +68,7 @@ class TextFieldWidget extends StatelessWidget {
         prefixIconConstraints: BoxConstraints(
           minWidth:
               context.scaleWidth(40) +
-              context.scaleWidth(35), // مساحة الأيقونة + padding
+              context.scaleWidth(35),
           minHeight: 0,
         ),
 
@@ -77,7 +82,6 @@ class TextFieldWidget extends StatelessWidget {
 
         focusedBorder: _OutlineBorderBulider(context, Colors.transparent),
         enabledBorder: _OutlineBorderBulider(
-          // ← ده اللي كان ناقص
           context,
           Colors.transparent,
         ),
