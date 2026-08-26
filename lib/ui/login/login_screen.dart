@@ -28,6 +28,7 @@ class LoginScreen extends StatefulWidget {
 class _LoginScreenState extends State<LoginScreen> {
   var emailController = TextEditingController();
   var passwordController = TextEditingController();
+  bool isPasswordVisible = false;
   var formKey = GlobalKey<FormState>();
   void onLogin() {
     if (!formKey.currentState!.validate()) {
@@ -44,7 +45,7 @@ class _LoginScreenState extends State<LoginScreen> {
   Widget build(BuildContext context) {
     var localeKeys = AppLocalizations.of(context)!;
     var langProvider = Provider.of<AppLanguageProvider>(context);
-    bool isPasswordVisible = false;
+
 
     return SafeArea(
         child: Scaffold(
@@ -54,7 +55,7 @@ class _LoginScreenState extends State<LoginScreen> {
               if (state is AuthLoadingState) {
                 DialogUtils.showLoading(
                   context: context,
-                  loadingText: 'Loading ...',
+                  loadingText: localeKeys.loading,
                 );
               }
               if (state is AuthSuccessState) {
@@ -77,7 +78,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 DialogUtils.showMessage(
                   context: context,
                   title: localeKeys.error,
-                  message: (state.errorMessage),
+                  message: getErrorMessage(state.errorMessage),
                   posActionName: localeKeys.ok,
                 );
               }
@@ -146,7 +147,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           prefIcon: SvgPicture.asset(AppImages.lockIcon),
                           prefixHeight: context.scaleHeight(30),
                           prefixWidth: context.scaleWidth(26),
-                          obscure:   isPasswordVisible ,
+                          obscure:   !isPasswordVisible ,
                           suffixHeight: context.scaleHeight(30),
                           suffixWidth: context.scaleWidth(30),
                           sufIcon: GestureDetector(
@@ -155,11 +156,11 @@ class _LoginScreenState extends State<LoginScreen> {
                                 isPasswordVisible = !isPasswordVisible;
                               });
                             },
-                            child: Icon(
-                              isPasswordVisible
-                                  ? Icons.remove_red_eye_rounded
-                                  : Icons.remove_red_eye_outlined,
-                            ),
+                            child: isPasswordVisible?Icon(
+                            
+                                   Icons.remove_red_eye_rounded,color: AppColors.whiteColor,
+                               
+                            ):SvgPicture.asset(AppImages.eyeOffIcon),
                           ),
                         ),
                       ),
