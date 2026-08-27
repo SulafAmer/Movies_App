@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:movies_app/l10n/app_localizations.dart';
@@ -7,9 +8,11 @@ import 'package:movies_app/utils/app_colors.dart';
 import 'package:movies_app/utils/app_images.dart';
 import 'package:movies_app/utils/app_styles.dart';
 import 'package:movies_app/utils/size_utils.dart';
-
+import 'package:movies_app/utils/toast_utils.dart';
 class ForgetPasswordScreen extends StatelessWidget {
-  const ForgetPasswordScreen({super.key});
+  ForgetPasswordScreen({super.key});
+
+  TextEditingController emailController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -50,6 +53,7 @@ class ForgetPasswordScreen extends StatelessWidget {
                 prefIcon: SvgPicture.asset(AppImages.emailIcon),
                 prefixHeight: context.scaleHeight(25),
                 prefixWidth: context.scaleWidth(31),
+                controller: emailController,
               ),
         
             ),
@@ -72,5 +76,21 @@ class ForgetPasswordScreen extends StatelessWidget {
     );
   }
 
-  void onVerifyEmail() {}
+  void onVerifyEmail() async {
+    await FirebaseAuth.instance
+        .sendPasswordResetEmail(email: emailController.text)
+        .then((value) {
+      ToastUtils.showToastMessage(
+        message: "email sent successfully",
+        backGroundColor: Colors.green,
+        textColor: AppColors.whiteColor,
+      );
+    }).catchError((error) {
+      ToastUtils.showToastMessage(
+        message: error.toString(),
+        backGroundColor: AppColors.redColor,
+        textColor: AppColors.whiteColor,
+      );
+    });
+  }
 }
