@@ -64,7 +64,7 @@ class MovieSection extends StatelessWidget {
                   borderRadius: 20,
                   boxHeight: 220,
                   boxWidth: 150,
-                  filmImage: movie.mediumCoverImage,
+                  filmImage: NetworkImage(movie.mediumCoverImage),
                   filmRate: movie.rating.toString(),
                 ),
               );

@@ -55,7 +55,8 @@ class MovieSuggestion extends StatelessWidget {
                           boxHeight: 500,
                           boxWidth: 189,
                           borderRadius: 16,
-                          filmImage: movies[index].mediumCoverImage!,
+                          filmImage: NetworkImage(
+                              movies[index].mediumCoverImage!),
                           filmRate: "${movies[index].rating!}",
                           horizontalMargin: context.scaleWidth(15),
                           verticaMargin: context.scaleWidth(10),

@@ -10,7 +10,7 @@ class FilmPosterWidget extends StatelessWidget {
   double boxHeight;
   double boxWidth;
   double borderRadius;
-  String filmImage;
+  ImageProvider<Object> filmImage;
   String filmRate;
   double? horizontalMargin;
   double? verticaMargin;
@@ -45,7 +45,7 @@ class FilmPosterWidget extends StatelessWidget {
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(borderRadius),
           image: DecorationImage(
-              image: NetworkImage(filmImage), fit: BoxFit.fill),
+              image: filmImage, fit: BoxFit.fill),
         ),
         child: Container(
           decoration: BoxDecoration(

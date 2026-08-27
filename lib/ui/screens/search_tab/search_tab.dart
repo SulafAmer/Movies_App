@@ -111,7 +111,7 @@ class _SearchTabState extends State<SearchTab> {
           boxHeight: 279,
           boxWidth: 189,
           borderRadius: 16,
-          filmImage: AppImages.blackWidowFilm,
+          filmImage: AssetImage(AppImages.blackWidowFilm),
           filmRate: "7.7",
         );
       },
