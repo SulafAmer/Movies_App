@@ -66,7 +66,8 @@ class HomeTab extends StatelessWidget {
                                   boxWidth: 200,
                                   filmImage: NetworkImage(
                                     movie.mediumCoverImage,
-                                  )filmRate:
+                                  ),
+                                  filmRate:
                                   movie.rating.toStringAsFixed(1),
                                   horizontalMargin: 6,
                                 );
