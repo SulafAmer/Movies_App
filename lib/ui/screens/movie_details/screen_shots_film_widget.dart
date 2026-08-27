@@ -18,7 +18,7 @@ class ScreenShotsFilmWidget extends StatelessWidget {
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(16),
       ),
-      child: Image.asset(image, fit: BoxFit.fill),
+      child: Image.network(image, fit: BoxFit.fill,),
     );
   }
 }

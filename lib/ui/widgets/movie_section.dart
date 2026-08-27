@@ -60,6 +60,7 @@ class MovieSection extends StatelessWidget {
                   horizontal: context.scaleWidth(8),
                 ),
                 child: FilmPosterWidget(
+                  filmId: movie.id,
                   borderRadius: 20,
                   boxHeight: 220,
                   boxWidth: 150,

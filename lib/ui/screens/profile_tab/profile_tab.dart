@@ -275,6 +275,7 @@ class _ProfileTabState extends State<ProfileTab> {
       ),
       itemBuilder: (context, index) {
         return FilmPosterWidget(
+          filmId: 0,
           boxHeight: 180,
           boxWidth: 116,
           borderRadius: 12,

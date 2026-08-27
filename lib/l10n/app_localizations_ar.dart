@@ -134,6 +134,8 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get genres => 'التصنيف';
+
+  @override
   String get family => 'عائلي';
 
   @override

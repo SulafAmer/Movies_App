@@ -61,6 +61,7 @@ class _BrowseTabState extends State<BrowseTab> {
                   ),
                   itemBuilder: (context, index) {
                     return FilmPosterWidget(
+                      filmId: 0,
                       boxHeight: 279,
                       boxWidth: 189,
                       borderRadius: 16,

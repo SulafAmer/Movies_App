@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:movies_app/api/api_manager.dart';
 import 'package:movies_app/l10n/app_localizations.dart';
 import 'package:movies_app/ui/screens/movie_details/film_info_widget.dart';
+import 'package:movies_app/ui/screens/movie_details/movie_suggestion.dart';
 import 'package:movies_app/ui/screens/movie_details/screen_shots_film_widget.dart';
-import 'package:movies_app/ui/widgets/film_poster_widget.dart';
+import 'package:movies_app/ui/widgets/main_error_widget.dart';
+import 'package:movies_app/ui/widgets/main_loading_widget.dart';
 import 'package:movies_app/utils/app_colors.dart';
 import 'package:movies_app/utils/app_images.dart';
 import 'package:movies_app/utils/app_styles.dart';
@@ -13,296 +16,541 @@ class MovieDetailsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: AppColors.blackColor,
-      body: SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            Container(
-              height: context.scaleHeight(750),
+    final int filmId =
+    ModalRoute
+        .of(context)!
+        .settings
+        .arguments as int;
 
-              decoration: BoxDecoration(
-                image: DecorationImage(
-                  image: AssetImage(AppImages.film1917),
-                  fit: BoxFit.fill,
-                ),
-              ),
-              child: Container(
-                decoration: BoxDecoration(
-                  gradient: LinearGradient(
-                    colors: [
-                      AppColors.transparentBlackColor,
-                      AppColors.blackColor,
-                    ],
-                    end: AlignmentGeometry.bottomCenter,
-                    begin: AlignmentGeometry.topCenter,
+
+    return FutureBuilder(
+      future: ApiManager.getMovieDetails(id: filmId),
+      builder: (context, snapshot) {
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return MainLoadingWidget();
+        }
+
+
+        if (snapshot.hasError) {
+          print(snapshot.error);
+
+          return Scaffold(
+            backgroundColor: Colors.white,
+            body: MainErrorWidget(
+              errorMesaage: "error",
+              onPressed: () {},
+            ),
+          );
+        }
+
+
+        final movie = snapshot.data?.data?.movie;
+
+        if (movie == null) {
+          return Scaffold(
+            backgroundColor: Colors.white,
+            body: MainErrorWidget(
+              errorMesaage: "Movie not found",
+              onPressed: () {},
+            ),
+          );
+        }
+
+
+        final List<String> screenShots = [
+          if (movie.largeScreenshotImage1 != null)
+            movie.largeScreenshotImage1!,
+
+          if (movie.largeScreenshotImage2 != null)
+            movie.largeScreenshotImage2!,
+
+          if (movie.largeScreenshotImage3 != null)
+            movie.largeScreenshotImage3!,
+        ];
+
+
+        final cast = movie.cast ?? [];
+
+
+        final genres = movie.genres ?? [];
+
+        return Scaffold(
+          backgroundColor: AppColors.blackColor,
+
+          body: SingleChildScrollView(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+
+
+                Container(
+                  height: context.scaleHeight(750),
+
+                  decoration: BoxDecoration(
+                    image: movie.largeCoverImage != null
+                        ? DecorationImage(
+                      image: NetworkImage(
+                        movie.largeCoverImage!,
+                      ),
+                      fit: BoxFit.fill,
+                    )
+                        : null,
                   ),
-                ),
-                child: SafeArea(
-                  child: Padding(
-                    padding: EdgeInsets.symmetric(
-                      horizontal: context.scaleWidth(15),
+
+                  child: Container(
+                    decoration: BoxDecoration(
+                      gradient: LinearGradient(
+                        colors: [
+                          AppColors.transparentBlackColor,
+                          AppColors.blackColor,
+                        ],
+                        end: Alignment.bottomCenter,
+                        begin: Alignment.topCenter,
+                      ),
                     ),
-                    child: Column(
-                      spacing: context.scaleHeight(170),
-                      children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+
+                    child: SafeArea(
+                      child: Padding(
+                        padding: EdgeInsets.symmetric(
+                          horizontal: context.scaleWidth(15),
+                        ),
+
+                        child: Column(
+                          spacing: context.scaleHeight(170),
+
                           children: [
-                            IconButton(
-                              onPressed: () {},
-                              icon: Icon(
-                                Icons.arrow_back_ios,
-                                color: Colors.white,
-                              ),
+
+
+                            Row(
+                              mainAxisAlignment:
+                              MainAxisAlignment.spaceBetween,
+
+                              children: [
+
+                                IconButton(
+                                  onPressed: () {
+                                    Navigator.pop(context);
+                                  },
+
+                                  icon: const Icon(
+                                    Icons.arrow_back_ios,
+                                    color: Colors.white,
+                                  ),
+                                ),
+
+                                IconButton(
+                                  onPressed: () {},
+
+                                  icon: const Icon(
+                                    Icons.bookmark,
+                                    color: Colors.white,
+                                  ),
+                                ),
+                              ],
                             ),
 
-                            IconButton(
-                              onPressed: () {},
-                              icon: Icon(Icons.bookmark, color: Colors.white),
+
+                            Image.asset(
+                              AppImages.playVideoImage,
+                            ),
+
+
+                            Column(
+                              spacing: context.scaleHeight(10),
+
+                              children: [
+
+                                Text(
+                                  movie.title ?? "",
+                                  style: AppStyles.bold24White,
+                                  textAlign: TextAlign.center,
+                                ),
+
+                                Text(
+                                  "${movie.year ?? ""}",
+                                  style: AppStyles.bold20Grey,
+                                ),
+
+                                ElevatedButton(
+                                  onPressed: () {},
+
+                                  style: ElevatedButton.styleFrom(
+                                    backgroundColor:
+                                    AppColors.redColor,
+
+                                    shape:
+                                    RoundedRectangleBorder(
+                                      borderRadius:
+                                      BorderRadius.circular(15),
+                                    ),
+                                  ),
+
+                                  child: Container(
+                                    padding: EdgeInsets.symmetric(
+                                      vertical:
+                                      context.scaleHeight(15),
+                                    ),
+
+                                    width: double.infinity,
+
+                                    child: Text(
+                                      AppLocalizations.of(context)!
+                                          .watch,
+
+                                      style:
+                                      AppStyles.bold20White,
+
+                                      textAlign: TextAlign.center,
+                                    ),
+                                  ),
+                                ),
+                              ],
                             ),
                           ],
                         ),
-                        Image.asset(AppImages.playVideoImage),
-                        Container(
-                          child: Column(
-                            spacing: context.scaleHeight(10),
-                            children: [
-                              Text(
-                                "Doctor Strange in the Multiverse of Madness",
-                                style: AppStyles.bold24White,
-                                textAlign: TextAlign.center,
-                              ),
-                              Text("2012", style: AppStyles.bold20Grey),
-                              ElevatedButton(
-                                onPressed: () {},
-                                style: ElevatedButton.styleFrom(
-                                  backgroundColor: AppColors.redColor,
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(15),
-                                  ),
-                                ),
-                                child: Container(
-                                  padding: EdgeInsets.symmetric(
-                                    vertical: context.scaleHeight(15),
-                                  ),
-                                  width: double.infinity,
-                                  child: Text(
-                                    AppLocalizations.of(context)!.watch,
-                                    style: AppStyles.bold20White,
-                                    textAlign: TextAlign.center,
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
+                      ),
+                    ),
+                  ),
+                ),
+
+
+                Padding(
+                  padding: EdgeInsets.symmetric(
+                    horizontal: context.scaleWidth(15),
+                    vertical: context.scaleHeight(10),
+                  ),
+                  child: Wrap(
+                    spacing: context.scaleWidth(8),
+                    runSpacing: context.scaleHeight(8),
+                    alignment: WrapAlignment.center,
+                    children: [
+                      SizedBox(
+                        width: context.scaleWidth(125),
+                        child: FilmInfoWidget(
+                          data: "${movie.likeCount ?? 0}",
+                          icon: Icons.favorite,
+                          style: AppStyles.bold24White,
+                          borderRadius: 16,
+                          horizontalPadding: 0,
                         ),
-                      ],
-                    ),
-                  ),
-                ),
-              ),
-            ),
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: context.scaleWidth(15),
-                  vertical: context.scaleHeight(10)),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  FilmInfoWidget(
-                    data: "15",
-                    icon: Icons.favorite,
-                    style: AppStyles.bold24White,
-                    borderRadius: 16,
-                  ),
-                  FilmInfoWidget(
-                    data: "90",
-                    icon: Icons.access_time_filled,
-                    style: AppStyles.bold24White,
-                    borderRadius: 16,
-                  ),
-                  FilmInfoWidget(
-                    data: "7.6",
-                    icon: Icons.star,
-                    style: AppStyles.bold24White,
-                    borderRadius: 16,
-                  ),
-                ],
-              ),
-            ),
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: context.scaleWidth(15),
-                  vertical: context.scaleHeight(10)),
-              child: Text(
-                AppLocalizations.of(context)!.screen_shots,
-                style: AppStyles.bold24White,
-              ),
-            ),
-            Container(
-              height: context.scaleHeight(560),
-              child: ListView.builder(
-                padding: EdgeInsets.all(0),
-                physics: NeverScrollableScrollPhysics(),
-                itemCount: 3,
-                itemBuilder: (context, index) {
-                  return ScreenShotsFilmWidget(image: AppImages.film1917);
-                },
-              ),
-            ),
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: context.scaleWidth(15),
-                  vertical: context.scaleHeight(10)),
-              child: Text(
-                AppLocalizations.of(context)!.similar,
-                style: AppStyles.bold24White,
-              ),
-            ),
-            Container(
-              height: context.scaleHeight(540),
-              child: GridView.builder(
-                padding: EdgeInsets.all(0),
-                physics: NeverScrollableScrollPhysics(),
-                itemCount: 3,
-                itemBuilder: (context, index) {
-                  return FilmPosterWidget(
-                    boxHeight: 500,
-                    boxWidth: 189,
-                    borderRadius: 16,
-                    filmImage: AppImages.film1917,
-                    filmRate: "7.7",
-                    horizontalMargin: context.scaleWidth(15),
-                    verticaMargin: context.scaleWidth(10),
-                  );
-                },
-                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 2,
-                  childAspectRatio: 12 / 15,
-                ),
-              ),
-            ),
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: context.scaleWidth(15),
-                  vertical: context.scaleHeight(10)),
-              child: Text(
-                AppLocalizations.of(context)!.summary,
-                style: AppStyles.bold24White,
-              ),
-            ),
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: context.scaleWidth(15)),
-              child: Text(
-                "Following the events of Spider-Man No Way Home, Doctor Strange unwittingly casts a forbidden spell that accidentally opens up the multiverse. With help from Wong and Scarlet Witch, Strange confronts various versions of himself as well as teaming up with the young America Chavez while traveling through various realities and working to restore reality as he knows it. Along the way, Strange and his allies realize they must take on a powerful new adversary who seeks to take over the multiverse.—Blazer346",
-                style: AppStyles.regular16lightGrey,
-              ),
-            ),
+                      ),
 
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: context.scaleWidth(15),
-                  vertical: context.scaleHeight(25)),
-              child: Text(
-                AppLocalizations.of(context)!.cast,
-                style: AppStyles.bold24White,
-              ),
-            ),
-            Container(
-              height: context.scaleHeight(620),
-              child: ListView.separated(
-                padding: EdgeInsets.all(0),
-                separatorBuilder: (context, index) {
-                  return SizedBox(height: context.scaleHeight(10));
-                },
-                physics: NeverScrollableScrollPhysics(),
-                itemCount: 4,
-                itemBuilder: (context, index) {
-                  return Padding(
-                    padding: EdgeInsets.symmetric(
-                      horizontal: context.scaleWidth(15),
+                      SizedBox(
+                        width: context.scaleWidth(125),
+                        child: FilmInfoWidget(
+                          data: "${movie.runtime ?? 0}",
+                          icon: Icons.access_time_filled,
+                          style: AppStyles.bold24White,
+                          borderRadius: 16,
+                          horizontalPadding: 0,
+                        ),
+                      ),
+
+                      SizedBox(
+                        width: context.scaleWidth(125),
+                        child: FilmInfoWidget(
+                          data: "${movie.rating ?? 0}",
+                          icon: Icons.star,
+                          style: AppStyles.bold24White,
+                          borderRadius: 16,
+                          horizontalPadding: 0,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+
+                Padding(
+                  padding: EdgeInsets.symmetric(
+                    horizontal: context.scaleWidth(15),
+                    vertical: context.scaleHeight(10),
+                  ),
+
+                  child: Text(
+                    AppLocalizations.of(context)!
+                        .screen_shots,
+
+                    style: AppStyles.bold24White,
+                  ),
+                ),
+
+
+                if (screenShots.isNotEmpty)
+                  Container(
+                    height: context.scaleHeight(560),
+
+                    child: ListView.builder(
+                      padding: EdgeInsets.zero,
+
+                      physics:
+                      const NeverScrollableScrollPhysics(),
+
+                      itemCount: screenShots.length,
+
+                      itemBuilder: (context, index) {
+                        return ScreenShotsFilmWidget(
+                          image: screenShots[index],
+                        );
+                      },
                     ),
-                    child: Container(
-                      constraints: BoxConstraints(
-                        minHeight: context.scaleHeight(140),
-                      ),
-                      padding: EdgeInsets.all(context.scaleWidth(15)),
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(16),
-                        color: AppColors.darkGrayColor,
-                      ),
-                      child: Row(
-                        spacing: context.scaleWidth(15),
-                        children: [
-                          Container(
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(16),
-                            ),
-                            clipBehavior: Clip.antiAlias,
-                            child: Image.asset(
-                              AppImages.film1917,
-                              fit: BoxFit.fill,
-                            ),
-                            width: context.scaleWidth(100),
-                            height: context.scaleHeight(100),
+                  ),
+
+
+                MovieSuggestion(
+                  filmId: filmId,
+                ),
+
+                Padding(
+                  padding: EdgeInsets.symmetric(
+                    horizontal: context.scaleWidth(15),
+                    vertical: context.scaleHeight(10),
+                  ),
+
+                  child: Text(
+                    AppLocalizations.of(context)!.summary,
+                    style: AppStyles.bold24White,
+                  ),
+                ),
+
+
+                Padding(
+                  padding: EdgeInsets.symmetric(
+                    horizontal: context.scaleWidth(15),
+                  ),
+
+                  child: Text(
+                    movie.descriptionFull ?? "",
+                    style: AppStyles.regular16lightGrey,
+                  ),
+                ),
+
+
+                Padding(
+                  padding: EdgeInsets.symmetric(
+                    horizontal: context.scaleWidth(15),
+                    vertical: context.scaleHeight(25),
+                  ),
+
+                  child: Text(
+                    AppLocalizations.of(context)!.cast,
+                    style: AppStyles.bold24White,
+                  ),
+                ),
+
+
+                if (cast.isNotEmpty)
+                  Container(
+                    height: context.scaleHeight(620),
+
+                    child: ListView.separated(
+                      padding: EdgeInsets.zero,
+
+                      physics:
+                      const NeverScrollableScrollPhysics(),
+
+                      itemCount: cast.length,
+
+                      separatorBuilder: (context, index) {
+                        return SizedBox(
+                          height: context.scaleHeight(10),
+                        );
+                      },
+
+                      itemBuilder: (context, index) {
+                        final currentCast = cast[index];
+
+                        return Padding(
+                          padding: EdgeInsets.symmetric(
+                            horizontal:
+                            context.scaleWidth(15),
                           ),
 
-                          Expanded(
-                            child: Column(
-                              spacing: context.scaleHeight(10),
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              mainAxisAlignment: MainAxisAlignment.center,
+                          child: Container(
+                            constraints: BoxConstraints(
+                              minHeight:
+                              context.scaleHeight(140),
+                            ),
+
+                            padding: EdgeInsets.all(
+                              context.scaleWidth(15),
+                            ),
+
+                            decoration: BoxDecoration(
+                              borderRadius:
+                              BorderRadius.circular(16),
+
+                              color:
+                              AppColors.darkGrayColor,
+                            ),
+
+                            child: Row(
+                              spacing:
+                              context.scaleWidth(15),
+
                               children: [
-                                Text(
-                                  "Name : Scarlet johanson",
-                                  style: AppStyles.regular20White,
+
+
+                                Container(
+                                  width:
+                                  context.scaleWidth(100),
+
+                                  height:
+                                  context.scaleHeight(100),
+
+                                  decoration: BoxDecoration(
+                                    borderRadius:
+                                    BorderRadius.circular(
+                                      16,
+                                    ),
+                                  ),
+
+                                  clipBehavior:
+                                  Clip.antiAlias,
+
+                                  child:
+                                  currentCast
+                                      .urlSmallImage !=
+                                      null
+                                      ? Image.network(
+                                    currentCast
+                                        .urlSmallImage!,
+                                    fit: BoxFit.cover,
+
+                                    errorBuilder:
+                                        (context,
+                                        error,
+                                        stackTrace,) {
+                                      return Image.asset(
+                                        AppImages
+                                            .film1917,
+                                        fit: BoxFit.cover,
+                                      );
+                                    },
+                                  )
+                                      : Image.asset(
+                                    AppImages.film1917,
+                                    fit: BoxFit.cover,
+                                  ),
                                 ),
-                                Text(
-                                  "Character : Scarlet johanson   ",
-                                  style: AppStyles.regular20White,
+
+
+                                Expanded(
+                                  child: Column(
+                                    spacing:
+                                    context.scaleHeight(
+                                      10,
+                                    ),
+
+                                    crossAxisAlignment:
+                                    CrossAxisAlignment.start,
+
+                                    mainAxisAlignment:
+                                    MainAxisAlignment.center,
+
+                                    children: [
+
+                                      Text(
+                                        "Name : ${currentCast.name ?? ""}",
+
+                                        style:
+                                        AppStyles
+                                            .regular20White,
+
+                                        maxLines: 2,
+
+                                        overflow:
+                                        TextOverflow.ellipsis,
+                                      ),
+
+                                      Text(
+                                        "Character : ${currentCast
+                                            .characterName ?? ""}",
+
+                                        style:
+                                        AppStyles
+                                            .regular20White,
+
+                                        maxLines: 2,
+
+                                        overflow:
+                                        TextOverflow.ellipsis,
+                                      ),
+                                    ],
+                                  ),
                                 ),
                               ],
                             ),
                           ),
-                        ],
+                        );
+                      },
+                    ),
+                  ),
+
+
+                Padding(
+                  padding: EdgeInsets.symmetric(
+                    horizontal: context.scaleWidth(15),
+                    vertical: context.scaleHeight(10),
+                  ),
+
+                  child: Text(
+                    AppLocalizations.of(context)!
+                        .genres,
+
+                    style: AppStyles.bold24White,
+                  ),
+                ),
+
+
+                if (genres.isNotEmpty)
+                  Padding(
+                    padding: const EdgeInsets.all(15),
+
+                    child: GridView.builder(
+                      shrinkWrap: true,
+
+                      padding: EdgeInsets.zero,
+
+                      physics:
+                      const NeverScrollableScrollPhysics(),
+
+                      itemCount: genres.length,
+
+                      itemBuilder: (context, index) {
+                        return Padding(
+                          padding:
+                          const EdgeInsets.all(3),
+
+                          child: FilmInfoWidget(
+                            horizontalPadding: 0,
+
+                            data: genres[index],
+
+                            style:
+                            AppStyles.regular16White,
+
+                            borderRadius: 12,
+                          ),
+                        );
+                      },
+
+                      gridDelegate:
+                      const SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: 3,
+
+                        childAspectRatio: 12 / 4,
+
+                        crossAxisSpacing: 5,
+
+                        mainAxisSpacing: 5,
                       ),
                     ),
-                  );
-                },
-              ),
+                  ),
+              ],
             ),
-
-            /////////////////////////////
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: context.scaleWidth(15),
-                  vertical: context.scaleHeight(10)),
-              child: Text(
-                AppLocalizations.of(context)!.genres,
-                style: AppStyles.bold24White,
-              ),
-            ),
-            Container(
-              height: context.scaleHeight(150),
-              child: GridView.builder(
-                padding: EdgeInsets.all(0),
-                physics: NeverScrollableScrollPhysics(),
-                itemCount: 5,
-                itemBuilder: (context, index) {
-                  return Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: FilmInfoWidget(
-                      data: "Action",
-                      style: AppStyles.regular16White,
-                      borderRadius: 12,
-                    ),
-                  );
-                },
-                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 3,
-                  childAspectRatio: 12 / 4,
-                ),
-              ),
-            ),
-          ],
-        ),
-      ),
+          ),
+        );
+      },
     );
   }
 }

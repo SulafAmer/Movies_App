@@ -107,6 +107,7 @@ class _SearchTabState extends State<SearchTab> {
       ),
       itemBuilder: (context, index) {
         return FilmPosterWidget(
+          filmId: 0,
           boxHeight: 279,
           boxWidth: 189,
           borderRadius: 16,
