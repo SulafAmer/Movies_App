@@ -35,6 +35,9 @@ class _UpdateProfileViewState extends State<_UpdateProfileView> {
   late TextEditingController phoneController;
   bool isDataLoaded = false;
 
+  String? nameError;
+  String? phoneError;
+
   final List<String> avatars = [
     AppImages.avatar1,
     AppImages.avatar2,
@@ -161,6 +164,16 @@ class _UpdateProfileViewState extends State<_UpdateProfileView> {
     );
   }
 
+  bool _validateAndShowErrors(UpdateProfileCubit cubit) {
+    final nameErr = cubit.validateName(nameController.text);
+    final phoneErr = cubit.validatePhone(phoneController.text);
+    setState(() {
+      nameError = nameErr;
+      phoneError = phoneErr;
+    });
+    return nameErr == null && phoneErr == null;
+  }
+
   @override
   Widget build(BuildContext context) {
     final loc = AppLocalizations.of(context)!;
@@ -199,6 +212,7 @@ class _UpdateProfileViewState extends State<_UpdateProfileView> {
         final isLoadingUserData = state is GetUserDataLoadingState;
         final isSaving = state is UpdateUserDataLoadingState;
         final isDeleting = state is DeleteAccountLoadingState;
+        final cubit = context.read<UpdateProfileCubit>();
 
         return Scaffold(
           backgroundColor: AppColors.blackColor,
@@ -254,12 +268,25 @@ class _UpdateProfileViewState extends State<_UpdateProfileView> {
                           iconPath: AppImages.nameIcon,
                           controller: nameController,
                           hint: loc.name,
+                          errorText: nameError,
+                          onChanged: (_) {
+                            if (nameError != null) {
+                              setState(() => nameError = null);
+                            }
+                          },
                         ),
                         SizedBox(height: context.scaleHeight(16)),
                         ProfileTextField(
                           iconPath: AppImages.phoneIcon,
                           controller: phoneController,
                           hint: loc.phoneNumber,
+                          keyboardType: TextInputType.phone,
+                          errorText: phoneError,
+                          onChanged: (_) {
+                            if (phoneError != null) {
+                              setState(() => phoneError = null);
+                            }
+                          },
                         ),
                         SizedBox(height: context.scaleHeight(16)),
                         Text(
@@ -305,13 +332,14 @@ class _UpdateProfileViewState extends State<_UpdateProfileView> {
                             onPressed: isSaving
                                 ? null
                                 : () {
-                                    context
-                                        .read<UpdateProfileCubit>()
-                                        .updateUserData(
-                                          name: nameController.text.trim(),
-                                          phone: phoneController.text.trim(),
-                                          avatar: selectedAvatar,
-                                        );
+                                    if (!_validateAndShowErrors(cubit)) {
+                                      return;
+                                    }
+                                    cubit.updateUserData(
+                                      name: nameController.text.trim(),
+                                      phone: phoneController.text.trim(),
+                                      avatar: selectedAvatar,
+                                    );
                                   },
                             style: ElevatedButton.styleFrom(
                               backgroundColor: AppColors.yellowColor,
