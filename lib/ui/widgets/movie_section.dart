@@ -63,10 +63,11 @@ class MovieSection extends StatelessWidget {
                   horizontal: context.scaleWidth(8),
                 ),
                 child: FilmPosterWidget(
+                  filmId: movie.id,
                   borderRadius: 20,
                   boxHeight: 220,
                   boxWidth: 150,
-                  filmImage: movie.mediumCoverImage,
+                  filmImage: NetworkImage(movie.mediumCoverImage),
                   filmRate: movie.rating.toString(),
                 ),
               );

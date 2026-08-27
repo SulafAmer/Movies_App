@@ -275,12 +275,13 @@ class _ProfileTabState extends State<ProfileTab> {
       ),
       itemBuilder: (context, index) {
         return FilmPosterWidget(
+          filmId: 0,
           boxHeight: 180,
           boxWidth: 116,
           borderRadius: 12,
-          filmImage: index.isEven
+          filmImage: AssetImage(index.isEven
               ? AppImages.blackWidowFilm
-              : AppImages.film1917,
+              : AppImages.film1917),
           filmRate: '7.7',
         );
       },

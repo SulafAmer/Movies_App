@@ -349,6 +349,7 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Genres'**
   String get genres;
+
   /// No description provided for @family.
   ///
   /// In en, this message translates to:

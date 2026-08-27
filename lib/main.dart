@@ -51,6 +51,9 @@ class MoviesApp extends StatelessWidget {
         AppRoutes.updateProfileScreenRouteName: (context) =>
             UpdateProfileScreen(),
         AppRoutes.homeScreenRouteName: (context) => HomeScreen(),
+        AppRoutes.movieDetailsScreenRouteName: (context) => MovieDetailsScreen()
+
+
       },
       locale: Locale(langProvider.appLanguage),
       localizationsDelegates: AppLocalizations.localizationsDelegates,

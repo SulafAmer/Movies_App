@@ -60,11 +60,13 @@ class HomeTab extends StatelessWidget {
                                 state.availableNowMovies[index];
 
                                 return FilmPosterWidget(
+                                  filmId: movie.id,
                                   borderRadius: 20,
                                   boxHeight: 351,
                                   boxWidth: 200,
-                                  filmImage:
-                                  movie.mediumCoverImage,
+                                  filmImage: NetworkImage(
+                                    movie.mediumCoverImage,
+                                  ),
                                   filmRate:
                                   movie.rating.toStringAsFixed(1),
                                   horizontalMargin: 6,
