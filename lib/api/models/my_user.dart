@@ -1,21 +1,37 @@
 class MyUser {
-  //collection name
+  // collection name
   static const String collectionName = 'Users';
 
-  //attributes
   String id;
   String email;
   String name;
+  String phone;
+  String avatar;
 
-  //constructor
-  MyUser({required this.id, required this.name, required this.email});
+  MyUser({
+    required this.id,
+    required this.name,
+    required this.email,
+    this.phone = '',
+    this.avatar = '',
+  });
 
-  //json=> object
   MyUser.fromJson(Map<String, dynamic> json)
-    : this(id: json['id'], email: json['email'], name: json['name']);
+    : this(
+        id: json['id'] ?? '',
+        email: json['email'] ?? '',
+        name: json['name'] ?? '',
+        phone: json['phone'] ?? '',
+        avatar: json['avatar'] ?? '',
+      );
 
-  //object=> json
   Map<String, dynamic> toJson() {
-    return {'id': id, 'email': email, 'name': name};
+    return {
+      'id': id,
+      'email': email,
+      'name': name,
+      'phone': phone,
+      'avatar': avatar,
+    };
   }
 }

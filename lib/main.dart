@@ -21,6 +21,7 @@ void main() async {
   await GoogleSignIn.instance.initialize();
 
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+
   runApp(
     ChangeNotifierProvider(
       create: (BuildContext context) {
@@ -39,7 +40,7 @@ class MoviesApp extends StatelessWidget {
     var langProvider = Provider.of<AppLanguageProvider>(context);
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      initialRoute: 'login_screen',
+      initialRoute: AppRoutes.loginScreenRouteName,
       routes: {
         AppRoutes.loginScreenRouteName: (context) => BlocProvider(
           create: (BuildContext context) => AuthCubit(),
@@ -52,8 +53,6 @@ class MoviesApp extends StatelessWidget {
             UpdateProfileScreen(),
         AppRoutes.homeScreenRouteName: (context) => HomeScreen(),
         AppRoutes.movieDetailsScreenRouteName: (context) => MovieDetailsScreen()
-
-
       },
       locale: Locale(langProvider.appLanguage),
       localizationsDelegates: AppLocalizations.localizationsDelegates,

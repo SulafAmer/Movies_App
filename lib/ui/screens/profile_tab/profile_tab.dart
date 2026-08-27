@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:movies_app/l10n/app_localizations.dart';
 import 'package:movies_app/ui/widgets/film_poster_widget.dart';
@@ -131,8 +132,9 @@ class _ProfileTabState extends State<ProfileTab> {
             height: context.scaleHeight(55),
             child: ElevatedButton(
               onPressed: () {
-                Navigator.of(context).pushNamed(
-                    AppRoutes.updateProfileScreenRouteName);
+                Navigator.of(
+                  context,
+                ).pushNamed(AppRoutes.updateProfileScreenRouteName);
               },
               style: ElevatedButton.styleFrom(
                 elevation: 0,
@@ -154,7 +156,14 @@ class _ProfileTabState extends State<ProfileTab> {
           child: SizedBox(
             height: context.scaleHeight(55),
             child: ElevatedButton(
-              onPressed: () {},
+              onPressed: () async {
+                await FirebaseAuth.instance.signOut();
+                if (!context.mounted) return;
+                Navigator.of(context).pushNamedAndRemoveUntil(
+                  AppRoutes.loginScreenRouteName,
+                  (route) => false,
+                );
+              },
               style: ElevatedButton.styleFrom(
                 elevation: 0,
                 padding: EdgeInsets.symmetric(
@@ -279,9 +288,9 @@ class _ProfileTabState extends State<ProfileTab> {
           boxHeight: 180,
           boxWidth: 116,
           borderRadius: 12,
-          filmImage: AssetImage(index.isEven
-              ? AppImages.blackWidowFilm
-              : AppImages.film1917),
+          filmImage: AssetImage(
+            index.isEven ? AppImages.blackWidowFilm : AppImages.film1917,
+          ),
           filmRate: '7.7',
         );
       },
