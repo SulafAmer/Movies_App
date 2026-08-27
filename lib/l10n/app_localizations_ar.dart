@@ -139,4 +139,84 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get drama => 'دراما';
+
+  @override
+  String get please_enter_email => 'من فضلك أدخل بريدك الإلكتروني';
+
+  @override
+  String get please_enter_valid_email => 'من فضلك أدخل بريد إلكتروني صحيح';
+
+  @override
+  String get please_enter_password => 'من فضلك أدخل كلمة المرور';
+
+  @override
+  String get password_too_short => 'كلمة المرور يجب ألا تقل عن 6 أحرف';
+
+  @override
+  String get please_enter_name => 'من فضلك أدخل اسمك';
+
+  @override
+  String get please_enter_confirm_password => 'من فضلك أكد كلمة المرور';
+
+  @override
+  String get passwords_do_not_match => 'كلمتا المرور غير متطابقتين';
+
+  @override
+  String get password_min_length => 'من فضلك أدخل 6 أحرف على الأقل';
+
+  @override
+  String get delete => 'حذف';
+
+  @override
+  String get loading => 'جاري التحميل...';
+
+  @override
+  String get ok => 'حسنًا';
+
+  @override
+  String get success => 'تم بنجاح';
+
+  @override
+  String get error => 'خطأ';
+
+  @override
+  String get waiting => 'انتظر...';
+
+  @override
+  String get something_went_wrong => 'حدث خطأ ما';
+
+  @override
+  String get registered_successfully => 'تم التسجيل بنجاح';
+
+  @override
+  String get email_already_registered => 'هذا البريد الإلكتروني مسجل بالفعل';
+
+  @override
+  String get weak_password => 'كلمة المرور ضعيفة جدًا';
+
+  @override
+  String get invalid_email => 'البريد الإلكتروني غير صحيح';
+
+  @override
+  String get registration_disabled => 'التسجيل متوقف حاليًا';
+
+  @override
+  String get login_successfully => 'تم تسجيل الدخول بنجاح';
+
+  @override
+  String get user_not_found => 'لا يوجد مستخدم بهذا البريد الإلكتروني.';
+
+  @override
+  String get wrong_password => 'كلمة المرور غير صحيحة.';
+
+  @override
+  String get invalid_credential =>
+      'البريد الإلكتروني أو كلمة المرور غير صحيحة.';
+
+  @override
+  String get could_not_get_user_information =>
+      'تعذر الحصول على بيانات المستخدم.';
+
+  @override
+  String get network_error => 'حدث خطأ بالشبكة';
 }

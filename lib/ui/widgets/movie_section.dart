@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:movies_app/utils/app_routes.dart';
 
 import '../../api/models/movies.dart';
 import '../../l10n/app_localizations.dart';
@@ -32,7 +33,9 @@ class MovieSection extends StatelessWidget {
                 style: AppStyles.regular20White,
               ),
               TextButton(
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.pushNamed(context, 'browse_tab');
+                },
                 child: Text(
                   AppLocalizations.of(context)!.see_more,
                   style: AppStyles.regular16Yellow,

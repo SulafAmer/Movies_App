@@ -361,6 +361,162 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Drama'**
   String get drama;
+
+  /// No description provided for @please_enter_email.
+  ///
+  /// In en, this message translates to:
+  /// **'Please Enter Your Email'**
+  String get please_enter_email;
+
+  /// No description provided for @please_enter_valid_email.
+  ///
+  /// In en, this message translates to:
+  /// **'Please Enter a Valid Email'**
+  String get please_enter_valid_email;
+
+  /// No description provided for @please_enter_password.
+  ///
+  /// In en, this message translates to:
+  /// **'Please Enter Your Password'**
+  String get please_enter_password;
+
+  /// No description provided for @password_too_short.
+  ///
+  /// In en, this message translates to:
+  /// **'Password Must Be At Least 6 Characters'**
+  String get password_too_short;
+
+  /// No description provided for @please_enter_name.
+  ///
+  /// In en, this message translates to:
+  /// **'Please Enter Your Name'**
+  String get please_enter_name;
+
+  /// No description provided for @please_enter_confirm_password.
+  ///
+  /// In en, this message translates to:
+  /// **'Please Confirm Your Password'**
+  String get please_enter_confirm_password;
+
+  /// No description provided for @passwords_do_not_match.
+  ///
+  /// In en, this message translates to:
+  /// **'Passwords Do Not Match'**
+  String get passwords_do_not_match;
+
+  /// No description provided for @password_min_length.
+  ///
+  /// In en, this message translates to:
+  /// **'Please Enter At Least 6 Characters'**
+  String get password_min_length;
+
+  /// No description provided for @delete.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete'**
+  String get delete;
+
+  /// No description provided for @loading.
+  ///
+  /// In en, this message translates to:
+  /// **'Loading...'**
+  String get loading;
+
+  /// No description provided for @ok.
+  ///
+  /// In en, this message translates to:
+  /// **'Ok'**
+  String get ok;
+
+  /// No description provided for @success.
+  ///
+  /// In en, this message translates to:
+  /// **'Success'**
+  String get success;
+
+  /// No description provided for @error.
+  ///
+  /// In en, this message translates to:
+  /// **'Error'**
+  String get error;
+
+  /// No description provided for @waiting.
+  ///
+  /// In en, this message translates to:
+  /// **'Waiting...'**
+  String get waiting;
+
+  /// No description provided for @something_went_wrong.
+  ///
+  /// In en, this message translates to:
+  /// **'Something went wrong.'**
+  String get something_went_wrong;
+
+  /// No description provided for @registered_successfully.
+  ///
+  /// In en, this message translates to:
+  /// **'Registered Successfully'**
+  String get registered_successfully;
+
+  /// No description provided for @email_already_registered.
+  ///
+  /// In en, this message translates to:
+  /// **'This email is already registered.'**
+  String get email_already_registered;
+
+  /// No description provided for @weak_password.
+  ///
+  /// In en, this message translates to:
+  /// **'The password provided is too weak.'**
+  String get weak_password;
+
+  /// No description provided for @invalid_email.
+  ///
+  /// In en, this message translates to:
+  /// **'Invalid email address.'**
+  String get invalid_email;
+
+  /// No description provided for @registration_disabled.
+  ///
+  /// In en, this message translates to:
+  /// **'Registration is currently disabled.'**
+  String get registration_disabled;
+
+  /// No description provided for @login_successfully.
+  ///
+  /// In en, this message translates to:
+  /// **'Login Successfully'**
+  String get login_successfully;
+
+  /// No description provided for @user_not_found.
+  ///
+  /// In en, this message translates to:
+  /// **'No user found for that email.'**
+  String get user_not_found;
+
+  /// No description provided for @wrong_password.
+  ///
+  /// In en, this message translates to:
+  /// **'Wrong password provided for that user.'**
+  String get wrong_password;
+
+  /// No description provided for @invalid_credential.
+  ///
+  /// In en, this message translates to:
+  /// **'Incorrect email or password.'**
+  String get invalid_credential;
+
+  /// No description provided for @could_not_get_user_information.
+  ///
+  /// In en, this message translates to:
+  /// **'Could not get user information.'**
+  String get could_not_get_user_information;
+
+  /// No description provided for @network_error.
+  ///
+  /// In en, this message translates to:
+  /// **'Network Error!'**
+  String get network_error;
 }
 
 class _AppLocalizationsDelegate
