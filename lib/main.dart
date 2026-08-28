@@ -11,6 +11,7 @@ import 'package:movies_app/ui/login/login_screen.dart';
 import 'package:movies_app/ui/login/register_screen.dart';
 import 'package:movies_app/ui/screens/home_screen.dart';
 import 'package:movies_app/ui/screens/movie_details/movie_details_screen.dart';
+import 'package:movies_app/ui/screens/movie_details/my_bloc_observer.dart';
 import 'package:movies_app/ui/screens/profile/update_profile_screen.dart';
 import 'package:movies_app/utils/app_routes.dart';
 import 'package:movies_app/utils/firebase_utils.dart';
@@ -21,6 +22,7 @@ void main() async {
   await GoogleSignIn.instance.initialize();
 
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+  Bloc.observer = MyBlocObserver();
 
   runApp(
     ChangeNotifierProvider(
