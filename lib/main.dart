@@ -11,6 +11,7 @@ import 'package:movies_app/ui/login/login_screen.dart';
 import 'package:movies_app/ui/login/register_screen.dart';
 import 'package:movies_app/ui/screens/home_screen.dart';
 import 'package:movies_app/ui/screens/movie_details/movie_details_screen.dart';
+import 'package:movies_app/ui/screens/movie_details/my_bloc_observer.dart';
 import 'package:movies_app/ui/screens/profile/update_profile_screen.dart';
 import 'package:movies_app/utils/app_routes.dart';
 import 'package:movies_app/utils/firebase_utils.dart';
@@ -21,6 +22,8 @@ void main() async {
   await GoogleSignIn.instance.initialize();
 
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+  Bloc.observer = MyBlocObserver();
+
   runApp(
     ChangeNotifierProvider(
       create: (BuildContext context) {
@@ -39,7 +42,7 @@ class MoviesApp extends StatelessWidget {
     var langProvider = Provider.of<AppLanguageProvider>(context);
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      initialRoute: 'login_screen',
+      initialRoute: AppRoutes.loginScreenRouteName,
       routes: {
         AppRoutes.loginScreenRouteName: (context) => BlocProvider(
           create: (BuildContext context) => AuthCubit(),
@@ -51,6 +54,7 @@ class MoviesApp extends StatelessWidget {
         AppRoutes.updateProfileScreenRouteName: (context) =>
             UpdateProfileScreen(),
         AppRoutes.homeScreenRouteName: (context) => HomeScreen(),
+        AppRoutes.movieDetailsScreenRouteName: (context) => MovieDetailsScreen()
       },
       locale: Locale(langProvider.appLanguage),
       localizationsDelegates: AppLocalizations.localizationsDelegates,

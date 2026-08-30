@@ -1,17 +1,21 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:movies_app/utils/app_colors.dart';
+import 'package:movies_app/utils/app_routes.dart';
 import 'package:movies_app/utils/app_styles.dart';
 import 'package:movies_app/utils/size_utils.dart';
+
+typedef onFilmClicked = void Function(int);
 
 class FilmPosterWidget extends StatelessWidget {
   double boxHeight;
   double boxWidth;
   double borderRadius;
-  String filmImage;
+  ImageProvider<Object> filmImage;
   String filmRate;
   double? horizontalMargin;
   double? verticaMargin;
+  int filmId;
+
 
 
   FilmPosterWidget({
@@ -23,63 +27,42 @@ class FilmPosterWidget extends StatelessWidget {
     required this.filmRate,
     this.horizontalMargin,
     this.verticaMargin,
+    required this.filmId
 
   });
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: EdgeInsets.symmetric(horizontal: horizontalMargin ?? 0,
-          vertical: verticaMargin ?? 0),
-      alignment: AlignmentDirectional.topStart,
-      height: context.scaleHeight(boxHeight),
-      width: context.scaleWidth(boxWidth),
-      child: ClipRRect(
-        borderRadius: BorderRadius.circular(borderRadius),
-        child: Stack(
-          alignment: AlignmentDirectional.topStart,
-          children: [
-
-            Positioned.fill(
-              child: CachedNetworkImage(
-                imageUrl: filmImage,
-                fit: BoxFit.cover,
-                placeholder: (context, url) => const Center(
-                  child: CircularProgressIndicator(),
-                ),
-                errorWidget: (context, url, error) => const Center(
-                  child: Icon(Icons.error),
-                ),
-              ),
-            ),
-
-            // Rating
-            Container(
-              height: context.scaleHeight(30),
-              width: context.scaleWidth(58),
-              margin: const EdgeInsets.all(10),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(10),
-                color: AppColors.transparentBlackColor,
-              ),
-              alignment: Alignment.center,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    filmRate,
-                    style: AppStyles.regular16White,
-                  ),
-                  const SizedBox(width: 3),
-                  Icon(
-                    Icons.star,
-                    color: AppColors.yellowColor,
-                    size: 18,
-                  ),
-                ],
-              ),
-            ),
-          ],
+    return InkWell(
+      onTap: () {
+        Navigator.pushNamed(context, AppRoutes.movieDetailsScreenRouteName,
+            arguments: filmId);
+      },
+      child: Container(
+        alignment: AlignmentDirectional.topStart,
+        height: context.scaleHeight(boxHeight),
+        width: context.scaleWidth(boxWidth),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(borderRadius),
+          image: DecorationImage(
+              image: filmImage, fit: BoxFit.fill),
+        ),
+        child: Container(
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(10),
+            color: AppColors.transparentBlackColor,
+          ),
+          alignment: Alignment.center,
+          height: context.scaleHeight(30),
+          width: context.scaleWidth(58),
+          margin: EdgeInsets.all(10),
+          child: Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Text(filmRate, style: AppStyles.regular16White),
+              Icon(Icons.star, color: AppColors.yellowColor),
+            ],
+          ),
         ),
       ),
     );
