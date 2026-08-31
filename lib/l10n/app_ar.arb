@@ -71,6 +71,15 @@
   "wrong_password": "كلمة المرور غير صحيحة.",
   "invalid_credential": "البريد الإلكتروني أو كلمة المرور غير صحيحة.",
   "could_not_get_user_information": "تعذر الحصول على بيانات المستخدم.",
-  "network_error":  "حدث خطأ بالشبكة"
+  "network_error":  "حدث خطأ بالشبكة",
+    "crime": "جريمة",
+       "documentary": "وثائقي",
+       "mystery": "غموض",
+       "horror": "رعب",
+       "romance": "رومانسي",
+       "comedy": "كوميدي",
+       "thriller": "اثارة",
+        "sci_fi": "خيال علمي",
+       "music": "موسيقي"
 
 }

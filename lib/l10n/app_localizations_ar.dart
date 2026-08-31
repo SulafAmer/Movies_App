@@ -219,4 +219,31 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get network_error => 'حدث خطأ بالشبكة';
+
+  @override
+  String get crime => 'جريمة';
+
+  @override
+  String get documentary => 'وثائقي';
+
+  @override
+  String get mystery => 'غموض';
+
+  @override
+  String get horror => 'رعب';
+
+  @override
+  String get romance => 'رومانسي';
+
+  @override
+  String get comedy => 'كوميدي';
+
+  @override
+  String get thriller => 'اثارة';
+
+  @override
+  String get sci_fi => 'خيال علمي';
+
+  @override
+  String get music => 'موسيقي';
 }
