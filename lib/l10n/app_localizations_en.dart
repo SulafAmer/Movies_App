@@ -219,4 +219,31 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get network_error => 'Network Error!';
+
+  @override
+  String get crime => 'Crime';
+
+  @override
+  String get documentary => 'Documentary';
+
+  @override
+  String get mystery => 'Mystery';
+
+  @override
+  String get horror => 'Horror';
+
+  @override
+  String get romance => 'Romance';
+
+  @override
+  String get comedy => 'Comedy';
+
+  @override
+  String get thriller => 'Thriller';
+
+  @override
+  String get sci_fi => 'Sci-Fi';
+
+  @override
+  String get music => 'Music';
 }

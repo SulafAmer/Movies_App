@@ -71,7 +71,14 @@
   "wrong_password": "Wrong password provided for that user.",
   "invalid_credential": "Incorrect email or password.",
   "could_not_get_user_information": "Could not get user information.",
-  "network_error": "Network Error!"
-
-
+  "network_error": "Network Error!",
+     "crime": "Crime",
+     "documentary": "Documentary",
+     "mystery": "Mystery",
+     "horror": "Horror",
+     "romance": "Romance",
+     "comedy": "Comedy",
+     "thriller": "Thriller",
+      "sci_fi": "Sci-Fi",
+     "music": "Music"
 }
