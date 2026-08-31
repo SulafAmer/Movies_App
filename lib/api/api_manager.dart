@@ -1,0 +1,110 @@
+import 'dart:math';
+
+import 'package:dio/dio.dart';
+import 'package:movies_app/api/api_constants.dart';
+import 'package:movies_app/api/dio/dio_error_handler.dart';
+import 'package:movies_app/api/end_points.dart';
+import 'package:movies_app/api/models/browse_model.dart';
+import 'package:movies_app/api/models/movie_datails.dart';
+import 'package:movies_app/api/models/movie_suggestion.dart';
+import 'package:movies_app/api/models/movies_response.dart';
+
+class ApiManager {
+  //todo:dio implementation
+  static Dio dio = Dio(BaseOptions(baseUrl: ApiConstants.baseUrl));
+  //todo: INTERCEPTOR
+  ApiManager() {
+    // dio.interceptors.add(DioInterceptor());
+    // dio.interceptors.add(
+    // PrettyDioLogger(
+    //   requestHeader: true,
+    //   requestBody: true,
+    //   responseHeader: false,
+    //   responseBody: true,
+    //   error: true,
+    // ),
+    // );
+  }
+  Future<MoviesResponse> getMoviesList({String? genre , int limit=10}) async {
+    try {
+      var response = await dio.get(
+        EndPoints.moviesListApi,
+        queryParameters: {
+          'limit': limit,
+          if (genre != null)'genre':genre,
+          'sort_by': 'rating',
+          'order_by': 'desc'},
+      );
+      return MoviesResponse.fromJson(response.data);
+    } on DioException catch (e) {
+      final message = DioErrorHandler.handle(e);
+      throw Exception(message);
+    }
+  }
+  Future<MoviesResponse> getRandomMoviesList({ int limit=10}) async {
+    final randomPage=Random().nextInt(50)+1;
+    try {
+      var response = await dio.get(
+        EndPoints.moviesListApi,
+        queryParameters: {
+          'limit': limit,
+          'page':randomPage,
+        },
+      );
+      return MoviesResponse.fromJson(response.data);
+    } on DioException catch (e) {
+      final message = DioErrorHandler.handle(e);
+      throw Exception(message);
+    }
+  }
+
+  static Future<MovieDetails> getMovieDetails({required int id}) async {
+    try {
+      var response = await dio.get(
+          EndPoints.movieDetails,
+          queryParameters: {
+            "movie_id": id,
+            "with_images": true,
+            "with_cast": true
+          });
+
+      return MovieDetails.fromJson(response.data);
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  static Future<MovieSuggestion> getMovieSuggestion({required int id}) async {
+    try {
+      var response = await dio.get(
+          EndPoints.movieSuggestion,
+          queryParameters: {
+            "movie_id": id,
+          });
+
+      return MovieSuggestion.fromJson(response.data);
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  static Future<BrowseModel> getMoviesByCategory(
+      {required String genre}) async {
+    try {
+      var response = await dio.get(
+          EndPoints.moviesListApi,
+          queryParameters: {
+            "genre": genre,
+            "limit": 50
+          });
+
+      return BrowseModel.fromJson(response.data);
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+
+  
+  
+}
