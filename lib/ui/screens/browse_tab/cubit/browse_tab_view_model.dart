@@ -5,14 +5,14 @@ import 'package:movies_app/ui/screens/browse_tab/cubit/browse_tab_states.dart';
 class BrowseTabViewModel extends Cubit<BrowseTabStates> {
   BrowseTabViewModel() : super(BrowseTabLoadingState());
 
-  void getMoviesByCategory(String genre) async {
+  void getAllMovies() async {
     try {
       emit(BrowseTabLoadingState());
-      var response = await ApiManager.getMoviesByCategory(genre: genre);
+      var response = await ApiManager.getAllMovies();
       if (response.status == "error") {
         emit(BrowseTabErrorState(errorMessage: response.statusMessage!));
       } else {
-        emit(BrowseTabSuccessState(browseResponse: response));
+        emit(BrowseTabSuccessState(moviesResponse: response));
         return;
       }
     } catch (e) {

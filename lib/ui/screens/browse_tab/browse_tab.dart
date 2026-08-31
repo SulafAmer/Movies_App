@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:movies_app/l10n/app_localizations.dart';
 import 'package:movies_app/ui/screens/browse_tab/cubit/browse_tab_states.dart';
 import 'package:movies_app/ui/screens/browse_tab/cubit/browse_tab_view_model.dart';
 import 'package:movies_app/ui/screens/browse_tab/tab_item_widget.dart';
@@ -11,7 +10,7 @@ import 'package:movies_app/utils/app_colors.dart';
 import 'package:movies_app/utils/size_utils.dart';
 
 class BrowseTab extends StatefulWidget {
-  BrowseTab({super.key});
+  const BrowseTab({super.key});
 
   @override
   State<BrowseTab> createState() => _BrowseTabState();
@@ -21,68 +20,52 @@ class _BrowseTabState extends State<BrowseTab> {
   BrowseTabViewModel viewModel = BrowseTabViewModel();
 
   int selectedIndex = 0;
-  List<String> genres = [
-    "Drama",
-    "Crime",
-    "Documentary",
-    "Mystery",
-    "Horror",
-    "Romance",
-    "Comedy",
-    "Thriller",
-    "Action",
-    "Sci-Fi",
-    "Family",
-    "Music",
-    "Adventure"
-  ];
-  late String selectedGenre = genres[selectedIndex];
+  String? selectedGenre;
 
   @override
   Widget build(BuildContext context) {
-    List<String> localizationGenres = [
-      AppLocalizations.of(context)!.drama,
-      AppLocalizations.of(context)!.crime,
-      AppLocalizations.of(context)!.documentary,
-      AppLocalizations.of(context)!.mystery,
-      AppLocalizations.of(context)!.horror,
-      AppLocalizations.of(context)!.romance,
-      AppLocalizations.of(context)!.comedy,
-      AppLocalizations.of(context)!.thriller,
-      AppLocalizations.of(context)!.action,
-      AppLocalizations.of(context)!.sci_fi,
-      AppLocalizations.of(context)!.family,
-      AppLocalizations.of(context)!.music,
-      AppLocalizations.of(context)!.adventure,
-    ];
-
-
     return BlocProvider(
       create: (context) {
-        viewModel.getMoviesByCategory(selectedGenre);
+        viewModel.getAllMovies();
         return viewModel;
       },
       child: BlocBuilder<BrowseTabViewModel, BrowseTabStates>(
         builder: (context, state) {
+
           if (state is BrowseTabLoadingState) {
             return MainLoadingWidget();
           }
-
 
           else if (state is BrowseTabErrorState) {
             return Center(
               child: MainErrorWidget(
                 errorMesaage: state.errorMessage,
                 onPressed: () {
-                  viewModel.getMoviesByCategory(selectedGenre);
+                  viewModel.getAllMovies();
                 },
               ),
             );
           }
 
-
           else if (state is BrowseTabSuccessState) {
-            final movies = state.browseResponse.data!.movies;
+            final movies = state.moviesResponse.data!.movies;
+
+            final Set<String> genresSet = {};
+
+            for (final movie in movies!) {
+              genresSet.addAll(movie.genres ?? []);
+            }
+
+            final List<String> genres = genresSet.toList();
+
+            if (selectedGenre == null && genres.isNotEmpty) {
+              selectedGenre = genres.first;
+              selectedIndex = 0;
+            }
+
+            final filteredMovies = movies.where((movie) {
+              return movie.genres?.contains(selectedGenre) ?? false;
+            }).toList();
 
             return Scaffold(
               backgroundColor: AppColors.blackColor,
@@ -92,49 +75,66 @@ class _BrowseTabState extends State<BrowseTab> {
                   child: Column(
                     spacing: context.scaleHeight(20),
                     children: [
-                      Container(
+
+
+                      SizedBox(
                         height: context.scaleHeight(60),
                         child: ListView.separated(
                           scrollDirection: Axis.horizontal,
+                          itemCount: genres.length,
+
                           itemBuilder: (context, index) {
+                            final genre = genres[index];
+
                             return InkWell(
                               onTap: () {
-                                selectedIndex = index;
-                                selectedGenre = genres[selectedIndex];
-                                setState(() {});
-                                viewModel.getMoviesByCategory(selectedGenre);
+                                setState(() {
+                                  selectedIndex = index;
+                                  selectedGenre = genre;
+                                });
                               },
+
                               child: TabItemWidget(
                                 isSelected: selectedIndex == index,
-                                text: localizationGenres[index],
+                                text: genre,
                               ),
                             );
                           },
+
                           separatorBuilder: (context, index) {
-                            return SizedBox(width: context.scaleWidth(15));
+                            return SizedBox(
+                              width: context.scaleWidth(15),
+                            );
                           },
-                          itemCount: genres.length,
                         ),
                       ),
+
                       Expanded(
                         child: GridView.builder(
-                          itemCount: movies!.length,
+                          itemCount: filteredMovies.length,
 
-                          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                          gridDelegate:
+                          SliverGridDelegateWithFixedCrossAxisCount(
                             crossAxisCount: 2,
-                            mainAxisSpacing: context.scaleHeight(20),
-                            crossAxisSpacing: context.scaleWidth(20),
+                            mainAxisSpacing:
+                            context.scaleHeight(20),
+                            crossAxisSpacing:
+                            context.scaleWidth(20),
                             childAspectRatio: 2 / 2.8,
                           ),
+
                           itemBuilder: (context, index) {
+                            final movie = filteredMovies[index];
+
                             return FilmPosterWidget(
-                              filmId: movies[index].id!,
+                              filmId: movie.id!,
                               boxHeight: 279,
                               boxWidth: 189,
                               borderRadius: 16,
                               filmImage: NetworkImage(
-                                  movies[index].mediumCoverImage!),
-                              filmRate: "${movies[index].rating}",
+                                movie.mediumCoverImage!,
+                              ),
+                              filmRate: "${movie.rating}",
                             );
                           },
                         ),
@@ -145,7 +145,6 @@ class _BrowseTabState extends State<BrowseTab> {
               ),
             );
           }
-
 
           else {
             return MainLoadingWidget();

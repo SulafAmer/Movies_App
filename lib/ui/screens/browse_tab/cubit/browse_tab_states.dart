@@ -1,4 +1,4 @@
-import 'package:movies_app/api/models/browse_model.dart';
+import 'package:movies_app/api/models/all_movies.dart';
 
 abstract class BrowseTabStates {}
 
@@ -11,7 +11,7 @@ class BrowseTabErrorState extends BrowseTabStates {
 }
 
 class BrowseTabSuccessState extends BrowseTabStates {
-  BrowseModel browseResponse;
+  AllMovies moviesResponse;
 
-  BrowseTabSuccessState({required this.browseResponse});
+  BrowseTabSuccessState({required this.moviesResponse});
 }

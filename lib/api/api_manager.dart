@@ -4,7 +4,7 @@ import 'package:dio/dio.dart';
 import 'package:movies_app/api/api_constants.dart';
 import 'package:movies_app/api/dio/dio_error_handler.dart';
 import 'package:movies_app/api/end_points.dart';
-import 'package:movies_app/api/models/browse_model.dart';
+import 'package:movies_app/api/models/all_movies.dart';
 import 'package:movies_app/api/models/movie_datails.dart';
 import 'package:movies_app/api/models/movie_suggestion.dart';
 import 'package:movies_app/api/models/movies_response.dart';
@@ -25,7 +25,8 @@ class ApiManager {
     // ),
     // );
   }
-  Future<MoviesResponse> getMoviesList({String? genre , int limit=10}) async {
+
+  Future<MoviesResponse> getMoviesList({String? genre, int limit = 10}) async {
     try {
       var response = await dio.get(
         EndPoints.moviesListApi,
@@ -88,23 +89,18 @@ class ApiManager {
     }
   }
 
-  static Future<BrowseModel> getMoviesByCategory(
-      {required String genre}) async {
+  static Future<AllMovies> getAllMovies() async {
     try {
       var response = await dio.get(
           EndPoints.moviesListApi,
           queryParameters: {
-            "genre": genre,
-            "limit": 50
-          });
+            "limit": 50});
 
-      return BrowseModel.fromJson(response.data);
+      return AllMovies.fromJson(response.data);
     } catch (e) {
       rethrow;
     }
   }
 
 
-  
-  
 }
