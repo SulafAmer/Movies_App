@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:movies_app/api/models/movie.dart';
 import 'package:movies_app/api/models/my_user.dart';
 
 class FirebaseUtils {
@@ -95,20 +96,46 @@ class FirebaseUtils {
     }
   }
 
-  static  Future<List<int>> getFavouriteMovieIds() async {
-   final uid = FirebaseAuth.instance.currentUser?.uid;
-   if (uid == null) {
-    throw Exception('No user is currently logged in');
-   }
+  static Future<List<int>> getFavouriteMovieIds() async {
+    final uid = FirebaseAuth.instance.currentUser?.uid;
+    if (uid == null) {
+      throw Exception('No user is currently logged in');
+    }
 
+    final snapshot = await FirebaseFirestore.instance
+        .collection('users')
+        .doc(uid)
+        .collection('favourites')
+        .get();
+    return snapshot.docs.map((doc) => int.parse(doc.id)).toList();
+  }
 
-   final snapshot = await FirebaseFirestore.instance
-       .collection('users')
-       .doc(uid)
-       .collection('favourites')
-       .get();
-   return snapshot.docs.map((doc) => int.parse(doc.id)).toList();
+  static Future<void> addMovieToHistoryList(Movie movie) async {
+    final uid = FirebaseAuth.instance.currentUser?.uid;
+    if (uid == null) {
+      throw Exception('No User is Currently logged in ');
+    }
+    final docRef = FirebaseFirestore.instance
+        .collection('users')
+        .doc(uid)
+        .collection('history')
+        .doc(movie.id.toString());
+
+      await docRef.set({'addedAt': FieldValue.serverTimestamp()});
 
   }
 
+  static Future<List<int>> getSavedMoviesIds() async {
+    final uid = FirebaseAuth.instance.currentUser?.uid;
+    if (uid == null) {
+      throw Exception('No user is currently logged in');
+    }
+    final snapshot = await FirebaseFirestore.instance
+        .collection('users')
+        .doc(uid)
+        .collection('history').orderBy('addedAt',descending: true)
+        .get();
+
+    return snapshot.docs.map((doc) => int.parse(doc.id)).toList();
+  }
 }

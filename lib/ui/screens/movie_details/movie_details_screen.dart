@@ -16,6 +16,7 @@ import 'package:movies_app/di/injection.dart';
 import 'package:movies_app/ui/screens/profile_tab/watch_list/cubit/watch_list_cubit.dart';
 
 import '../../../api/models/movie.dart' as lean;
+import '../profile_tab/history_list/cubit/history_list_cubit.dart';
 
 class MovieDetailsScreen extends StatefulWidget {
   const MovieDetailsScreen({super.key});
@@ -44,8 +45,32 @@ class _MovieDetailsScreenState extends State<MovieDetailsScreen> {
           },
         ),
         BlocProvider.value(value:  getIt<WatchListCubit>()),
+
+        BlocProvider.value(
+          value: getIt<HistoryCubit>(),
+        ),
+
       ],
-      child: BlocBuilder<MovieDetailsViewModel, MovieDetailsStates>(
+      child:
+      BlocConsumer<MovieDetailsViewModel, MovieDetailsStates>(
+        listener: (context, state) {
+          if (state is MovieDetailsSuccessState) {
+            final movie = state.movieDetails.data?.movie;
+
+            if (movie != null) {
+              context.read<HistoryCubit>().addToHistory(
+                lean.Movie(
+                  id: movie.id ?? 0,
+                  title: movie.title ?? '',
+                  year: movie.year ?? 0,
+                  rating: movie.rating ?? 0.0,
+                  mediumCoverImage: movie.mediumCoverImage ?? '',
+                ),
+              );
+            }
+          }
+        },
+
         builder: (context, state) {
           if (state is MovieDetailsLoadingState) {
             return MainLoadingWidget();
@@ -134,7 +159,7 @@ class _MovieDetailsScreenState extends State<MovieDetailsScreen> {
                             ),
 
                             child: Column(
-                              spacing: context.scaleHeight(170),
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
 
                               children: [
 

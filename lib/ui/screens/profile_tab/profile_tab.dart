@@ -9,6 +9,8 @@ import 'package:movies_app/utils/app_routes.dart';
 import 'package:movies_app/utils/app_styles.dart';
 import 'package:movies_app/utils/size_utils.dart';
 import 'package:movies_app/api/models/movie.dart';
+import 'history_list/cubit/history_list_cubit.dart';
+import 'history_list/cubit/history_list_states.dart';
 import 'watch_list/cubit/watch_list_cubit.dart';
 import 'watch_list/cubit/watch_list_states.dart';
 
@@ -26,7 +28,7 @@ class _ProfileTabState extends State<ProfileTab> {
   void initState() {
     super.initState();
     context.read<WatchListCubit>().loadWatchList();
-  }
+    context.read<HistoryCubit>().loadHistory();  }
 
   @override
   Widget build(BuildContext context) {
@@ -67,6 +69,26 @@ class _ProfileTabState extends State<ProfileTab> {
   }
 
   Widget _buildProfileHeader(AppLocalizations localizations) {
+    final watchListCount = context.select<WatchListCubit, int>((cubit) {
+      final state = cubit.state;
+
+      if (state is WatchListSuccessState) {
+        return state.moviesList.length;
+      }
+
+      return 0;
+    });
+
+    final historyCount = context.select<HistoryCubit, int>((cubit) {
+      final state = cubit.state;
+
+      if (state is HistorySuccessState) {
+        return state.moviesList.length;
+      }
+
+      return 0;
+    });
+
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -92,22 +114,34 @@ class _ProfileTabState extends State<ProfileTab> {
             ],
           ),
         ),
+
         SizedBox(width: context.scaleWidth(40)),
+
         Expanded(
           child: Padding(
-            padding: EdgeInsets.only(top: context.scaleHeight(35)),
+            padding: EdgeInsets.only(
+              top: context.scaleHeight(35),
+            ),
             child: Row(
               children: [
                 Expanded(
-                  child: _buildStat(value: '12', label: localizations.wishList),
+                  child: _buildStat(
+                    value: watchListCount.toString(),
+                    label: localizations.wishList,
+                  ),
                 ),
+
                 Container(
                   width: 1,
                   height: context.scaleHeight(62),
                   color: Colors.white24,
                 ),
+
                 Expanded(
-                  child: _buildStat(value: '10', label: localizations.history),
+                  child: _buildStat(
+                    value: historyCount.toString(),
+                    label: localizations.history,
+                  ),
                 ),
               ],
             ),
@@ -332,6 +366,37 @@ class _ProfileTabState extends State<ProfileTab> {
   }
 
   Widget _buildHistoryGrid() {
+    return BlocBuilder<HistoryCubit, HistoryStates>(
+      builder: (context, state) {
+
+        if (state is HistoryLoadingState) {
+          return const Center(
+            child: CircularProgressIndicator(),
+          );
+        }
+
+        if (state is HistoryErrorState) {
+          return Center(
+            child: Text(
+              state.errorMessage,
+              style: AppStyles.regular20White,
+            ),
+          );
+        }
+
+        if (state is HistorySuccessState) {
+          if (state.moviesList.isEmpty) {
+            return _buildEmptyWatchList();
+          }
+
+          return _buildHistoryMoviesGrid(state.moviesList);
+        }
+
+        return const SizedBox.shrink();
+      },
+    );
+  }
+  Widget _buildHistoryMoviesGrid(List<Movie> movies) {
     return GridView.builder(
       padding: EdgeInsets.fromLTRB(
         context.scaleWidth(16),
@@ -339,7 +404,7 @@ class _ProfileTabState extends State<ProfileTab> {
         context.scaleWidth(16),
         context.scaleHeight(125),
       ),
-      itemCount: 10,
+      itemCount: movies.length,
       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: 3,
         mainAxisSpacing: context.scaleHeight(16),
@@ -347,15 +412,15 @@ class _ProfileTabState extends State<ProfileTab> {
         childAspectRatio: 116 / 180,
       ),
       itemBuilder: (context, index) {
+        final movie = movies[index];
+
         return FilmPosterWidget(
-          filmId: 0,
+          filmId: movie.id,
           boxHeight: 180,
           boxWidth: 116,
           borderRadius: 12,
-          filmImage: AssetImage(
-            index.isEven ? AppImages.blackWidowFilm : AppImages.film1917,
-          ),
-          filmRate: '7.7',
+          filmImage: NetworkImage(movie.mediumCoverImage),
+          filmRate: movie.rating.toString(),
         );
       },
     );
