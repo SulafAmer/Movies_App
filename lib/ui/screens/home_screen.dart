@@ -1,0 +1,115 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:movies_app/ui/screens/browse_tab/browse_tab.dart';
+import 'package:movies_app/ui/screens/home_tab/cubit/movies_view_model.dart';
+import 'package:movies_app/ui/screens/home_tab/home_tab.dart';
+import 'package:movies_app/ui/screens/profile_tab/history_list/cubit/history_list_cubit.dart';
+import 'package:movies_app/ui/screens/profile_tab/profile_tab.dart';
+import 'package:movies_app/ui/screens/profile_tab/watch_list/cubit/watch_list_cubit.dart';
+import 'package:movies_app/ui/screens/search_tab/search_tab.dart';
+import 'package:movies_app/utils/app_colors.dart';
+import 'package:movies_app/utils/app_images.dart';
+import 'package:movies_app/utils/size_utils.dart';
+
+import '../../di/injection.dart';
+
+class HomeScreen extends StatefulWidget {
+  const HomeScreen({super.key});
+
+  @override
+  State<HomeScreen> createState() =>
+      _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  int selectedIndex = 0;
+
+
+  List<Widget> tabs = [
+    //..getMovies() instead of => MoviesViewModel viewModel; viewModel.getMovies;
+
+    BlocProvider(create:(context) => MoviesViewModel()..getMovies(),
+    child: HomeTab()),
+    SearchTab(),
+    BrowseTab(),
+    MultiBlocProvider(
+      providers: [
+        BlocProvider.value(
+          value: getIt<WatchListCubit>(),
+        ),
+        BlocProvider.value(
+          value: getIt<HistoryCubit>(),
+        ),
+      ],
+      child: const ProfileTab(),
+    ),
+  ];
+
+  List<String> bottomNavBarTabs = [
+    AppImages.homeIcon,
+    AppImages.searchIcon,
+    AppImages.exploreIcon,
+    AppImages.profileIcon,
+  ];
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: Colors.transparent,
+      body: Stack(
+        alignment: Alignment.bottomCenter,
+        children: [
+          tabs[selectedIndex],
+          Container(
+            decoration: BoxDecoration(
+              color: AppColors.darkGrayColor,
+              borderRadius: BorderRadius.circular(
+                16,
+              ),
+            ),
+            margin: EdgeInsets.symmetric(
+              vertical: context.scaleHeight(40),
+              horizontal: context.scaleWidth(15),
+            ),
+            padding: EdgeInsets.symmetric(
+              vertical: 20,
+              horizontal: 15,
+            ),
+            height: context.scaleHeight(70),
+            child: ListView.builder(
+              scrollDirection: Axis.horizontal,
+              itemBuilder: (context, index) {
+                return InkWell(
+                  onTap: () {
+                    selectedIndex = index;
+                    setState(() {});
+                  },
+                  child: SizedBox(
+                    width: context.scaleWidth(95),
+                    height: context.scaleHeight(
+                      20,
+                    ),
+                    child: SvgPicture.asset(
+                      bottomNavBarTabs[index],
+                      colorFilter:
+                          ColorFilter.mode(
+                            selectedIndex == index
+                                ? AppColors
+                                      .yellowColor
+                                : AppColors
+                                      .whiteColor,
+                            BlendMode.srcIn,
+                          ),
+                    ),
+                  ),
+                );
+              },
+              itemCount: 4,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
