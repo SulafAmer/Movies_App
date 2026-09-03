@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movies_app/l10n/app_localizations.dart';
 import 'package:movies_app/ui/widgets/film_poster_widget.dart';
 import 'package:movies_app/utils/app_colors.dart';
@@ -7,6 +8,9 @@ import 'package:movies_app/utils/app_images.dart';
 import 'package:movies_app/utils/app_routes.dart';
 import 'package:movies_app/utils/app_styles.dart';
 import 'package:movies_app/utils/size_utils.dart';
+import 'package:movies_app/api/models/movie.dart';
+import 'watch_list/cubit/watch_list_cubit.dart';
+import 'watch_list/cubit/watch_list_states.dart';
 
 class ProfileTab extends StatefulWidget {
   const ProfileTab({super.key});
@@ -17,6 +21,12 @@ class ProfileTab extends StatefulWidget {
 
 class _ProfileTabState extends State<ProfileTab> {
   int selectedTabIndex = 0;
+
+  @override
+  void initState() {
+    super.initState();
+    context.read<WatchListCubit>().loadWatchList();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -47,7 +57,7 @@ class _ProfileTabState extends State<ProfileTab> {
             _buildTabs(localizations),
             Expanded(
               child: selectedTabIndex == 0
-                  ? _buildEmptyWatchList()
+                  ? _buildWatchListTab()
                   : _buildHistoryGrid(),
             ),
           ],
@@ -161,7 +171,7 @@ class _ProfileTabState extends State<ProfileTab> {
                 if (!context.mounted) return;
                 Navigator.of(context).pushNamedAndRemoveUntil(
                   AppRoutes.loginScreenRouteName,
-                  (route) => false,
+                      (route) => false,
                 );
               },
               style: ElevatedButton.styleFrom(
@@ -251,6 +261,60 @@ class _ProfileTabState extends State<ProfileTab> {
           ),
         ),
       ),
+    );
+  }
+
+  Widget _buildWatchListTab() {
+    return BlocBuilder<WatchListCubit, WatchListStates>(
+      builder: (context, state) {
+        if (state is WatchListLoadingState) {
+          return const Center(child: CircularProgressIndicator());
+        }
+
+        if (state is WatchListErrorState) {
+          return Center(
+            child: Text(state.errorMessage, style: AppStyles.regular20White),
+          );
+        }
+
+        if (state is WatchListSuccessState) {
+          if (state.moviesList.isEmpty) {
+            return _buildEmptyWatchList();
+          }
+          return _buildWatchListGrid(state.moviesList);
+        }
+
+        return const SizedBox.shrink();
+      },
+    );
+  }
+
+  Widget _buildWatchListGrid(List<Movie> movies) {
+    return GridView.builder(
+      padding: EdgeInsets.fromLTRB(
+        context.scaleWidth(16),
+        context.scaleHeight(26),
+        context.scaleWidth(16),
+        context.scaleHeight(125),
+      ),
+      itemCount: movies.length,
+      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+        crossAxisCount: 3,
+        mainAxisSpacing: context.scaleHeight(16),
+        crossAxisSpacing: context.scaleWidth(16),
+        childAspectRatio: 116 / 180,
+      ),
+      itemBuilder: (context, index) {
+        final movie = movies[index];
+        return FilmPosterWidget(
+          filmId: movie.id,
+          boxHeight: 180,
+          boxWidth: 116,
+          borderRadius: 12,
+          filmImage: NetworkImage(movie.mediumCoverImage),
+          filmRate: movie.rating.toString(),
+        );
+      },
     );
   }
 

@@ -5,10 +5,13 @@ import 'package:movies_app/ui/screens/browse_tab/browse_tab.dart';
 import 'package:movies_app/ui/screens/home_tab/cubit/movies_view_model.dart';
 import 'package:movies_app/ui/screens/home_tab/home_tab.dart';
 import 'package:movies_app/ui/screens/profile_tab/profile_tab.dart';
+import 'package:movies_app/ui/screens/profile_tab/watch_list/cubit/watch_list_cubit.dart';
 import 'package:movies_app/ui/screens/search_tab/search_tab.dart';
 import 'package:movies_app/utils/app_colors.dart';
 import 'package:movies_app/utils/app_images.dart';
 import 'package:movies_app/utils/size_utils.dart';
+
+import '../../di/injection.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -29,7 +32,10 @@ class _HomeScreenState extends State<HomeScreen> {
     child: HomeTab()),
     SearchTab(),
     BrowseTab(),
-    const ProfileTab(),
+    BlocProvider.value(
+      value: getIt<WatchListCubit>(),
+      child: const ProfileTab(),
+    ),
   ];
 
   List<String> bottomNavBarTabs = [

@@ -1,5 +1,5 @@
 
-import 'movies.dart';
+import 'movie.dart';
 
 class MoviesResponse {
   final String status;

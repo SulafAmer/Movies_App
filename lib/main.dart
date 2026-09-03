@@ -17,8 +17,11 @@ import 'package:movies_app/utils/app_routes.dart';
 import 'package:movies_app/utils/firebase_utils.dart';
 import 'package:provider/provider.dart';
 
+import 'di/injection.dart';
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  configureDependencies();
   await GoogleSignIn.instance.initialize();
 
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);

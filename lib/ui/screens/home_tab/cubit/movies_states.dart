@@ -1,4 +1,5 @@
-import 'package:movies_app/api/models/movies.dart';
+
+import '../../../../api/models/movie.dart';
 
 abstract class MoviesStates {}
 class MovieLoadingState extends MoviesStates{}

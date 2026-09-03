@@ -5,9 +5,10 @@ import 'package:movies_app/api/api_constants.dart';
 import 'package:movies_app/api/dio/dio_error_handler.dart';
 import 'package:movies_app/api/end_points.dart';
 import 'package:movies_app/api/models/all_movies.dart';
-import 'package:movies_app/api/models/movie_datails.dart';
 import 'package:movies_app/api/models/movie_suggestion.dart';
 import 'package:movies_app/api/models/movies_response.dart';
+import 'package:movies_app/api/models/movie.dart';
+import 'package:movies_app/api/models/movie_datails.dart' as details;
 
 class ApiManager {
   //todo:dio implementation
@@ -59,7 +60,7 @@ class ApiManager {
     }
   }
 
-  static Future<MovieDetails> getMovieDetails({required int id}) async {
+  static Future<details.MovieDetails> getMovieDetails({required int id}) async {
     try {
       var response = await dio.get(
           EndPoints.movieDetails,
@@ -69,7 +70,7 @@ class ApiManager {
             "with_cast": true
           });
 
-      return MovieDetails.fromJson(response.data);
+      return details.MovieDetails.fromJson(response.data);
     } catch (e) {
       rethrow;
     }
@@ -100,6 +101,18 @@ class ApiManager {
     } catch (e) {
       rethrow;
     }
+  }
+  static Future<Movie> getMovieById(int id) async {
+    final response = await getMovieDetails(id: id);
+    final m = response.data!.movie!;
+
+    return Movie(
+      id: m.id ?? 0,
+      title: m.title ?? '',
+      year: m.year ?? 0,
+      rating: m.rating ?? 0.0,
+      mediumCoverImage: m.mediumCoverImage ?? '',
+    );
   }
 
 

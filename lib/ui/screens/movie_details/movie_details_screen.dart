@@ -12,6 +12,10 @@ import 'package:movies_app/utils/app_colors.dart';
 import 'package:movies_app/utils/app_images.dart';
 import 'package:movies_app/utils/app_styles.dart';
 import 'package:movies_app/utils/size_utils.dart';
+import 'package:movies_app/di/injection.dart';
+import 'package:movies_app/ui/screens/profile_tab/watch_list/cubit/watch_list_cubit.dart';
+
+import '../../../api/models/movie.dart' as lean;
 
 class MovieDetailsScreen extends StatefulWidget {
   const MovieDetailsScreen({super.key});
@@ -31,11 +35,16 @@ class _MovieDetailsScreenState extends State<MovieDetailsScreen> {
         .settings
         .arguments as int;
 
-    return BlocProvider(
-      create: (context) {
-        viewModel.getMovieDetails(filmId);
-        return viewModel;
-      },
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (context) {
+            viewModel.getMovieDetails(filmId);
+            return viewModel;
+          },
+        ),
+        BlocProvider.value(value:  getIt<WatchListCubit>()),
+      ],
       child: BlocBuilder<MovieDetailsViewModel, MovieDetailsStates>(
         builder: (context, state) {
           if (state is MovieDetailsLoadingState) {
@@ -147,13 +156,28 @@ class _MovieDetailsScreenState extends State<MovieDetailsScreen> {
                                       ),
                                     ),
 
-                                    IconButton(
-                                      onPressed: () {},
+                                    Builder(
+                                      builder: (context) {
+                                        final leanMovie = lean.Movie(
+                                          id: movie.id ?? 0,
+                                          title: movie.title ?? '',
+                                          year: movie.year ?? 0,
+                                          rating: movie.rating ?? 0.0,
+                                          mediumCoverImage: movie.mediumCoverImage ?? '',
+                                        );
 
-                                      icon: const Icon(
-                                        Icons.bookmark,
-                                        color: Colors.white,
-                                      ),
+                                        final isFav = context.watch<WatchListCubit>().isFavourite(leanMovie.id);
+
+                                        return IconButton(
+                                          onPressed: () {
+                                            context.read<WatchListCubit>().toggleFavourite(leanMovie);
+                                          },
+                                          icon: Icon(
+                                            isFav ? Icons.bookmark : Icons.bookmark_border,
+                                            color: Colors.white,
+                                          ),
+                                        );
+                                      },
                                     ),
                                   ],
                                 ),

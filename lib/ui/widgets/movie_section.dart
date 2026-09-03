@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:movies_app/utils/app_routes.dart';
 
-import '../../api/models/movies.dart';
+import '../../api/models/movie.dart';
 import '../../l10n/app_localizations.dart';
 import '../../utils/app_styles.dart';
 import '../../utils/size_utils.dart';
