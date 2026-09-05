@@ -43,28 +43,29 @@ class MoviesApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var langProvider = Provider.of<AppLanguageProvider>(context);
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      initialRoute: AppRoutes.loginScreenRouteName,
-      routes: {
-        AppRoutes.loginScreenRouteName: (context) => BlocProvider(
-          create: (BuildContext context) => AuthCubit(),
-          child: LoginScreen(),
-        ),
-        AppRoutes.registerScreenRouteName: (context) => RegisterScreen(),
-        AppRoutes.forgetPasswordScreenRouteName: (context) =>
-            ForgetPasswordScreen(),
-        AppRoutes.updateProfileScreenRouteName: (context) =>
-            UpdateProfileScreen(),
-        AppRoutes.homeScreenRouteName: (context) => HomeScreen(),
-        AppRoutes.movieDetailsScreenRouteName: (context) => MovieDetailsScreen()
-      },
-      locale: Locale(langProvider.appLanguage),
-      localizationsDelegates: AppLocalizations.localizationsDelegates,
-      supportedLocales: [
-        Locale('en'), // English
-        Locale('ar'),
-      ],
+    return BlocProvider(
+      create: (BuildContext context) => AuthCubit(),
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        initialRoute: AppRoutes.loginScreenRouteName,
+        routes: {
+          AppRoutes.loginScreenRouteName: (context) => LoginScreen(),
+          AppRoutes.registerScreenRouteName: (context) => RegisterScreen(),
+          AppRoutes.forgetPasswordScreenRouteName: (context) =>
+              ForgetPasswordScreen(),
+          AppRoutes.updateProfileScreenRouteName: (context) =>
+              UpdateProfileScreen(),
+          AppRoutes.homeScreenRouteName: (context) => HomeScreen(),
+          AppRoutes.movieDetailsScreenRouteName: (context) =>
+              MovieDetailsScreen(),
+        },
+        locale: Locale(langProvider.appLanguage),
+        localizationsDelegates: AppLocalizations.localizationsDelegates,
+        supportedLocales: [
+          Locale('en'), // English
+          Locale('ar'),
+        ],
+      ),
     );
   }
 }

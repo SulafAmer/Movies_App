@@ -6,6 +6,7 @@ import 'package:movies_app/utils/firebase_utils.dart';
 
 class AuthCubit extends Cubit<AuthStates> {
   AuthCubit() : super(AuthInitialState());
+
   void login({required String email, required String password}) async {
     emit(AuthLoadingState());
     try {
@@ -27,6 +28,30 @@ class AuthCubit extends Cubit<AuthStates> {
       emit(AuthErrorState(errorMessage: e.toString()));
     } catch (e) {
       emit(AuthErrorState(errorMessage: e.toString()));
+    }
+  }
+
+  void register({
+    required String name,
+    required String email,
+    required String password,
+    required String phone,
+    required String avatar,
+  }) async {
+    emit(RegisterLoadingState());
+    try {
+      await FirebaseUtils.register(
+        name: name,
+        email: email,
+        password: password,
+        phone: phone,
+        avatar: avatar,
+      );
+      emit(RegisterSuccessState());
+    } on FirebaseAuthException catch (e) {
+      emit(RegisterErrorState(errorCode: e.code));
+    } catch (e) {
+      emit(RegisterErrorState(errorCode: 'unknown-error'));
     }
   }
 }

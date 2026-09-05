@@ -30,6 +30,32 @@ class FirebaseUtils {
     return await FirebaseAuth.instance.signInWithCredential(credential);
   }
 
+  static Future<UserCredential> register({
+    required String name,
+    required String email,
+    required String password,
+    required String phone,
+    required String avatar,
+  }) async {
+    UserCredential credential = await FirebaseAuth.instance
+        .createUserWithEmailAndPassword(email: email, password: password);
+
+    final user = MyUser(
+      id: credential.user!.uid,
+      name: name,
+      email: email,
+      phone: phone,
+      avatar: avatar,
+    );
+
+    await FirebaseFirestore.instance
+        .collection(MyUser.collectionName)
+        .doc(user.id)
+        .set(user.toJson());
+
+    return credential;
+  }
+
   static Future<MyUser> getCurrentUserData() async {
     final uid = FirebaseAuth.instance.currentUser?.uid;
     if (uid == null) {
@@ -121,8 +147,7 @@ class FirebaseUtils {
         .collection('history')
         .doc(movie.id.toString());
 
-      await docRef.set({'addedAt': FieldValue.serverTimestamp()});
-
+    await docRef.set({'addedAt': FieldValue.serverTimestamp()});
   }
 
   static Future<List<int>> getSavedMoviesIds() async {
@@ -133,7 +158,8 @@ class FirebaseUtils {
     final snapshot = await FirebaseFirestore.instance
         .collection('users')
         .doc(uid)
-        .collection('history').orderBy('addedAt',descending: true)
+        .collection('history')
+        .orderBy('addedAt', descending: true)
         .get();
 
     return snapshot.docs.map((doc) => int.parse(doc.id)).toList();
