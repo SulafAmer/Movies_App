@@ -246,4 +246,20 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get music => 'Music';
+
+  @override
+  String get networkErrorMessage =>
+      'Please check your internet connection and try again';
+
+  @override
+  String get serverErrorMessage =>
+      'Something went wrong on our end, please try again';
+
+  @override
+  String get unknownErrorMessage =>
+      'An unexpected error occurred, please try again';
+
+  @override
+  String get noSearchResultsMessage =>
+      'No movies found with this name, try another one';
 }

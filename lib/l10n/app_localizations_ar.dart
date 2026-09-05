@@ -246,4 +246,16 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get music => 'موسيقي';
+
+  @override
+  String get networkErrorMessage => 'تأكد من اتصالك بالإنترنت وحاول تاني';
+
+  @override
+  String get serverErrorMessage => 'حصل خطأ في السيرفر، حاول تاني بعد شوية';
+
+  @override
+  String get unknownErrorMessage => 'حصل خطأ غير متوقع، حاول تاني';
+
+  @override
+  String get noSearchResultsMessage => 'مفيش أفلام بالاسم ده، جربي اسم تاني';
 }
