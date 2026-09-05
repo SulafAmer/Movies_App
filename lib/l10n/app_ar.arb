@@ -80,6 +80,10 @@
        "comedy": "كوميدي",
        "thriller": "اثارة",
         "sci_fi": "خيال علمي",
-       "music": "موسيقي"
+       "music": "موسيقي",
+  "networkErrorMessage": "تأكد من اتصالك بالإنترنت وحاول تاني",
+  "serverErrorMessage": "حصل خطأ في السيرفر، حاول تاني بعد شوية",
+  "unknownErrorMessage": "حصل خطأ غير متوقع، حاول تاني",
+  "noSearchResultsMessage": "مفيش أفلام بالاسم ده، جربي اسم تاني"
 
 }

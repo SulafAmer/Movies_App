@@ -80,5 +80,9 @@
      "comedy": "Comedy",
      "thriller": "Thriller",
       "sci_fi": "Sci-Fi",
-     "music": "Music"
+     "music": "Music",
+  "networkErrorMessage": "Please check your internet connection and try again",
+  "serverErrorMessage": "Something went wrong on our end, please try again",
+  "unknownErrorMessage": "An unexpected error occurred, please try again",
+  "noSearchResultsMessage": "No movies found with this name, try another one"
 }

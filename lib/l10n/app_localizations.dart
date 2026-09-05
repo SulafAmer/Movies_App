@@ -571,6 +571,30 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Music'**
   String get music;
+
+  /// No description provided for @networkErrorMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Please check your internet connection and try again'**
+  String get networkErrorMessage;
+
+  /// No description provided for @serverErrorMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Something went wrong on our end, please try again'**
+  String get serverErrorMessage;
+
+  /// No description provided for @unknownErrorMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'An unexpected error occurred, please try again'**
+  String get unknownErrorMessage;
+
+  /// No description provided for @noSearchResultsMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'No movies found with this name, try another one'**
+  String get noSearchResultsMessage;
 }
 
 class _AppLocalizationsDelegate
