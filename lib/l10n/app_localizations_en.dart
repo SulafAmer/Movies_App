@@ -54,6 +54,18 @@ class AppLocalizationsEn extends AppLocalizations {
   String get alreadyHaveAccount => 'Already Have Account?';
 
   @override
+  String get loading => 'Loading...';
+
+  @override
+  String get nameTooShort => 'Name must be at least 3 characters';
+
+  @override
+  String get phoneRequired => 'Phone number is required';
+
+  @override
+  String get phoneInvalid => 'Please enter a valid phone number';
+
+  @override
   String get forgetPasswordTitle => 'Forget Password';
 
   @override
@@ -167,9 +179,6 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get delete => 'Delete';
-
-  @override
-  String get loading => 'Loading...';
 
   @override
   String get ok => 'Ok';

@@ -54,6 +54,18 @@ class AppLocalizationsAr extends AppLocalizations {
   String get alreadyHaveAccount => 'عندك حساب بالفعل؟';
 
   @override
+  String get loading => 'جاري التحميل...';
+
+  @override
+  String get nameTooShort => 'الاسم يجب أن يكون 3 أحرف على الأقل';
+
+  @override
+  String get phoneRequired => 'رقم الموبايل مطلوب';
+
+  @override
+  String get phoneInvalid => 'من فضلك أدخل رقم موبايل صحيح';
+
+  @override
   String get forgetPasswordTitle => 'نسيت كلمة المرور';
 
   @override
@@ -166,9 +178,6 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get delete => 'حذف';
-
-  @override
-  String get loading => 'جاري التحميل...';
 
   @override
   String get ok => 'حسنًا';
