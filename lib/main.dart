@@ -13,8 +13,8 @@ import 'package:movies_app/ui/screens/home_screen.dart';
 import 'package:movies_app/ui/screens/movie_details/movie_details_screen.dart';
 import 'package:movies_app/ui/screens/movie_details/my_bloc_observer.dart';
 import 'package:movies_app/ui/screens/profile_tab/update_screen/update_profile_screen.dart';
+import 'package:movies_app/ui/screens/splash_screen/splash.dart';
 import 'package:movies_app/utils/app_routes.dart';
-import 'package:movies_app/utils/firebase_utils.dart';
 import 'package:provider/provider.dart';
 
 import 'di/injection.dart';
@@ -47,7 +47,7 @@ class MoviesApp extends StatelessWidget {
       create: (BuildContext context) => AuthCubit(),
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
-        initialRoute: AppRoutes.loginScreenRouteName,
+        initialRoute: AppRoutes.splashScreenRouteName,
         routes: {
           AppRoutes.loginScreenRouteName: (context) => LoginScreen(),
           AppRoutes.registerScreenRouteName: (context) => RegisterScreen(),
@@ -58,6 +58,7 @@ class MoviesApp extends StatelessWidget {
           AppRoutes.homeScreenRouteName: (context) => HomeScreen(),
           AppRoutes.movieDetailsScreenRouteName: (context) =>
               MovieDetailsScreen(),
+          AppRoutes.splashScreenRouteName: (context) => SplashScreen(),
         },
         locale: Locale(langProvider.appLanguage),
         localizationsDelegates: AppLocalizations.localizationsDelegates,
