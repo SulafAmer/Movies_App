@@ -110,7 +110,7 @@ class FirebaseUtils {
       throw Exception('No User is Currently logged in ');
     }
     final docRef = FirebaseFirestore.instance
-        .collection('users')
+        .collection('Users')
         .doc(uid)
         .collection('favourites')
         .doc(movieId.toString());
@@ -129,7 +129,7 @@ class FirebaseUtils {
     }
 
     final snapshot = await FirebaseFirestore.instance
-        .collection('users')
+        .collection('Users')
         .doc(uid)
         .collection('favourites')
         .get();
@@ -142,7 +142,7 @@ class FirebaseUtils {
       throw Exception('No User is Currently logged in ');
     }
     final docRef = FirebaseFirestore.instance
-        .collection('users')
+        .collection('Users')
         .doc(uid)
         .collection('history')
         .doc(movie.id.toString());
@@ -156,7 +156,7 @@ class FirebaseUtils {
       throw Exception('No user is currently logged in');
     }
     final snapshot = await FirebaseFirestore.instance
-        .collection('users')
+        .collection('Users')
         .doc(uid)
         .collection('history')
         .orderBy('addedAt', descending: true)

@@ -5,7 +5,8 @@ import 'package:movies_app/ui/screens/browse_tab/browse_tab.dart';
 import 'package:movies_app/ui/screens/home_tab/cubit/movies_view_model.dart';
 import 'package:movies_app/ui/screens/home_tab/home_tab.dart';
 import 'package:movies_app/ui/screens/profile_tab/history_list/cubit/history_list_cubit.dart';
-import 'package:movies_app/ui/screens/profile_tab/profile_tab.dart';
+import 'package:movies_app/ui/screens/profile_tab/profile_screen/cubit/profile_cubit.dart';
+import 'package:movies_app/ui/screens/profile_tab/profile_screen/profile_tab.dart';
 import 'package:movies_app/ui/screens/profile_tab/watch_list/cubit/watch_list_cubit.dart';
 import 'package:movies_app/ui/screens/search_tab/search_tab.dart';
 import 'package:movies_app/utils/app_colors.dart';
@@ -40,6 +41,9 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
         BlocProvider.value(
           value: getIt<HistoryCubit>(),
+        ),
+        BlocProvider.value(
+          value: getIt<ProfileCubit>(),
         ),
       ],
       child: const ProfileTab(),

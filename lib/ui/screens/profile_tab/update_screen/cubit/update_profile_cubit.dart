@@ -1,6 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movies_app/api/models/my_user.dart';
-import 'package:movies_app/ui/screens/profile/cubit/update_profile_states.dart';
+import 'package:movies_app/ui/screens/profile_tab/update_screen/cubit/update_profile_states.dart';
 import 'package:movies_app/utils/firebase_utils.dart';
 
 class UpdateProfileCubit extends Cubit<UpdateProfileStates> {

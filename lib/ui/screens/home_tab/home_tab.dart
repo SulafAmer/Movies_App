@@ -13,8 +13,16 @@ import '../../widgets/movie_section.dart';
 import 'cubit/movies_states.dart';
 import 'cubit/movies_view_model.dart';
 
-class HomeTab extends StatelessWidget {
+class HomeTab extends StatefulWidget {
   const HomeTab({super.key});
+
+  @override
+  State<HomeTab> createState() => _HomeTabState();
+}
+
+class _HomeTabState extends State<HomeTab> {
+  // 1. متغير لحفظ رقم الفيلم المعروض حالياً في الـ Carousel
+  int currentMovieIndex = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -23,22 +31,33 @@ class HomeTab extends StatelessWidget {
       body: BlocBuilder<MoviesViewModel, MoviesStates>(
         builder: (context, state) {
           if (state is MovieSuccessState) {
+            // للتأكد إن قائمة الأفلام مش فاضية عشان الأبلكيشن ما يضربش
+            final hasMovies = state.availableNowMovies.isNotEmpty;
+
+            // جلب رابط صورة الخلفية للفيلم الحالي من الـ API
+            final backgroundImage = hasMovies
+                ? state.availableNowMovies[currentMovieIndex].mediumCoverImage
+                : '';
+
             return SingleChildScrollView(
               child: Column(
                 spacing: context.scaleHeight(5),
                 children: [
+                  // 2. تحديث الـ Container لقراءة الخلفية ديناميكياً
                   Container(
                     decoration: BoxDecoration(
-                      image: DecorationImage(
-                        image: AssetImage(AppImages.film1917),
-                        fit: BoxFit.fill,
-                      ),
+                      image: hasMovies && backgroundImage.isNotEmpty
+                          ? DecorationImage(
+                        image: NetworkImage(backgroundImage), // استخدام NetworkImage لأن الصور جاية من سيرفر
+                        fit: BoxFit.cover,
+                      )
+                          : null,
                     ),
                     child: Container(
                       decoration: BoxDecoration(
                         gradient: LinearGradient(
                           colors: [
-                            AppColors.transparentBlackColor,
+                            AppColors.transparentBlackColor.withOpacity(0.3), // تقليل الشفافية فوق لتظهر الصورة بوضوح
                             AppColors.blackColor,
                           ],
                           begin: Alignment.topCenter,
@@ -52,12 +71,9 @@ class HomeTab extends StatelessWidget {
                             Image.asset(AppImages.availableNow),
 
                             CarouselSlider.builder(
-                              itemCount:
-                              state.availableNowMovies.length,
-                              itemBuilder:
-                                  (context, index, realIndex) {
-                                final movie =
-                                state.availableNowMovies[index];
+                              itemCount: state.availableNowMovies.length,
+                              itemBuilder: (context, index, realIndex) {
+                                final movie = state.availableNowMovies[index];
 
                                 return FilmPosterWidget(
                                   filmId: movie.id,
@@ -67,8 +83,7 @@ class HomeTab extends StatelessWidget {
                                   filmImage: NetworkImage(
                                     movie.mediumCoverImage,
                                   ),
-                                  filmRate:
-                                  movie.rating.toStringAsFixed(1),
+                                  filmRate: movie.rating.toStringAsFixed(1),
                                   horizontalMargin: 6,
                                 );
                               },
@@ -76,9 +91,14 @@ class HomeTab extends StatelessWidget {
                                 enlargeCenterPage: true,
                                 enlargeFactor: 0.34,
                                 viewportFraction: 0.62,
-                                height:
-                                context.scaleHeight(360),
+                                height: context.scaleHeight(360),
                                 initialPage: 0,
+                                // 3. تحديث الـ Index فور تغيير الفيلم ليعيد بناء الخلفية بالصورة الجديدة
+                                onPageChanged: (index, reason) {
+                                  setState(() {
+                                    currentMovieIndex = index;
+                                  });
+                                },
                               ),
                             ),
                           ],
@@ -90,14 +110,12 @@ class HomeTab extends StatelessWidget {
                   Image.asset(AppImages.watchNow),
 
                   MovieSection(
-                    title:
-                    AppLocalizations.of(context)!.family,
+                    title: AppLocalizations.of(context)!.family,
                     movies: state.familyMovies,
                   ),
 
                   MovieSection(
-                    title:
-                    AppLocalizations.of(context)!.drama,
+                    title: AppLocalizations.of(context)!.drama,
                     movies: state.dramaMovies,
                   ),
 
@@ -113,9 +131,7 @@ class HomeTab extends StatelessWidget {
             return MainErrorWidget(
               errorMesaage: state.errorMessage,
               onPressed: () {
-                context
-                    .read<MoviesViewModel>()
-                    .getMovies();
+                context.read<MoviesViewModel>().getMovies();
               },
             );
           }

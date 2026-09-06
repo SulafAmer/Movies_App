@@ -1,14 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movies_app/l10n/app_localizations.dart';
-import 'package:movies_app/ui/screens/profile/cubit/update_profile_cubit.dart';
-import 'package:movies_app/ui/screens/profile/cubit/update_profile_states.dart';
-import 'package:movies_app/ui/screens/profile/widgets/profile_text_field.dart';
+import 'package:movies_app/ui/screens/profile_tab/update_screen/widgets/profile_text_field.dart';
+
 import 'package:movies_app/utils/app_colors.dart';
 import 'package:movies_app/utils/app_images.dart';
 import 'package:movies_app/utils/app_routes.dart';
 import 'package:movies_app/utils/app_styles.dart';
 import 'package:movies_app/utils/size_utils.dart';
+
+import 'cubit/update_profile_cubit.dart';
+import 'cubit/update_profile_states.dart';
 
 class UpdateProfileScreen extends StatelessWidget {
   const UpdateProfileScreen({super.key});
