@@ -9,8 +9,8 @@ import 'package:movies_app/utils/app_images.dart';
 import 'package:movies_app/utils/app_styles.dart';
 import 'package:movies_app/utils/size_utils.dart';
 import 'package:movies_app/utils/toast_utils.dart';
-import 'package:movies_app/ui/widgets/main_loading_widget.dart'; // الـ Loading ويدجت بتاع مشروعكم
-import '../../../di/injection.dart'; // مسار الـ GetIt في مشروعك
+import 'package:movies_app/ui/widgets/main_loading_widget.dart';
+import '../../../di/injection.dart';
 import 'cubit/forget_password_cubit.dart';
 import 'cubit/forget_password_states.dart';
 
@@ -27,7 +27,7 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
 
   @override
   void dispose() {
-    emailController.dispose(); // تنظيف الذاكرة عند إغلاق الشاشة
+    emailController.dispose();
     super.dispose();
   }
 
@@ -36,7 +36,7 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
     var localeKeys = AppLocalizations.of(context)!;
 
     return BlocProvider(
-      // جلب الـ Cubit تلقائياً من الـ GetIt
+
       create: (context) => getIt<ForgotPasswordCubit>(),
       child: Scaffold(
         appBar: AppBar(
@@ -62,7 +62,7 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
                 backGroundColor: Colors.green,
                 textColor: AppColors.whiteColor,
               );
-              Navigator.pop(context); // الرجوع لشاشة الـ Login تلقائياً بعد النجاح
+              Navigator.pop(context);
             } else if (state is ForgotPasswordError) {
               ToastUtils.showToastMessage(
                 message: state.errorMessage,
@@ -73,7 +73,7 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
           },
           child: Padding(
             padding: EdgeInsets.symmetric(horizontal: context.scaleWidth(16)),
-            child: SingleChildScrollView( // لحماية الشاشة من الكيبورد إذا ظهر
+            child: SingleChildScrollView(
               child: Column(
                 children: [
                   Center(
@@ -97,7 +97,7 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
                   ),
                   SizedBox(height: context.scaleHeight(24)),
 
-                  // استخدام BlocBuilder للتحكم في شكل الزرار أثناء الـ Loading
+
                   Center(
                     child: SizedBox(
                       height: context.scaleHeight(56),
@@ -108,7 +108,7 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
                           }
                           return ElevatedButtonWidget(
                             onTab: () {
-                              // إرسال الإيميل للكوبيت عند الضغط
+
                               context.read<ForgotPasswordCubit>().sendPasswordResetEmail(
                                 emailController.text,
                               );

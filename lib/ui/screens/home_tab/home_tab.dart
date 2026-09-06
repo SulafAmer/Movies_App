@@ -21,7 +21,7 @@ class HomeTab extends StatefulWidget {
 }
 
 class _HomeTabState extends State<HomeTab> {
-  // 1. متغير لحفظ رقم الفيلم المعروض حالياً في الـ Carousel
+
   int currentMovieIndex = 0;
 
   @override
@@ -31,10 +31,9 @@ class _HomeTabState extends State<HomeTab> {
       body: BlocBuilder<MoviesViewModel, MoviesStates>(
         builder: (context, state) {
           if (state is MovieSuccessState) {
-            // للتأكد إن قائمة الأفلام مش فاضية عشان الأبلكيشن ما يضربش
+
             final hasMovies = state.availableNowMovies.isNotEmpty;
 
-            // جلب رابط صورة الخلفية للفيلم الحالي من الـ API
             final backgroundImage = hasMovies
                 ? state.availableNowMovies[currentMovieIndex].mediumCoverImage
                 : '';
@@ -43,12 +42,12 @@ class _HomeTabState extends State<HomeTab> {
               child: Column(
                 spacing: context.scaleHeight(5),
                 children: [
-                  // 2. تحديث الـ Container لقراءة الخلفية ديناميكياً
+
                   Container(
                     decoration: BoxDecoration(
                       image: hasMovies && backgroundImage.isNotEmpty
                           ? DecorationImage(
-                        image: NetworkImage(backgroundImage), // استخدام NetworkImage لأن الصور جاية من سيرفر
+                        image: NetworkImage(backgroundImage),
                         fit: BoxFit.cover,
                       )
                           : null,
@@ -57,7 +56,7 @@ class _HomeTabState extends State<HomeTab> {
                       decoration: BoxDecoration(
                         gradient: LinearGradient(
                           colors: [
-                            AppColors.transparentBlackColor.withOpacity(0.3), // تقليل الشفافية فوق لتظهر الصورة بوضوح
+                            AppColors.transparentBlackColor.withOpacity(0.3),
                             AppColors.blackColor,
                           ],
                           begin: Alignment.topCenter,
@@ -93,7 +92,7 @@ class _HomeTabState extends State<HomeTab> {
                                 viewportFraction: 0.62,
                                 height: context.scaleHeight(360),
                                 initialPage: 0,
-                                // 3. تحديث الـ Index فور تغيير الفيلم ليعيد بناء الخلفية بالصورة الجديدة
+
                                 onPageChanged: (index, reason) {
                                   setState(() {
                                     currentMovieIndex = index;
