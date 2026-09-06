@@ -1,19 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:movies_app/di/injection.dart';
 import 'package:movies_app/l10n/app_localizations.dart';
 import 'package:movies_app/ui/screens/movie_details/cubit/movie_details_states.dart';
 import 'package:movies_app/ui/screens/movie_details/cubit/movie_details_view_model.dart';
 import 'package:movies_app/ui/screens/movie_details/film_info_widget.dart';
 import 'package:movies_app/ui/screens/movie_details/movie_suggestion.dart';
 import 'package:movies_app/ui/screens/movie_details/screen_shots_film_widget.dart';
+import 'package:movies_app/ui/screens/profile_tab/watch_list/cubit/watch_list_cubit.dart';
 import 'package:movies_app/ui/widgets/main_error_widget.dart';
 import 'package:movies_app/ui/widgets/main_loading_widget.dart';
 import 'package:movies_app/utils/app_colors.dart';
 import 'package:movies_app/utils/app_images.dart';
 import 'package:movies_app/utils/app_styles.dart';
 import 'package:movies_app/utils/size_utils.dart';
-import 'package:movies_app/di/injection.dart';
-import 'package:movies_app/ui/screens/profile_tab/watch_list/cubit/watch_list_cubit.dart';
 
 import '../../../api/models/movie.dart' as lean;
 import '../profile_tab/history_list/cubit/history_list_cubit.dart';
@@ -497,7 +497,7 @@ class _MovieDetailsScreenState extends State<MovieDetailsScreen> {
                                         },
                                       )
                                           : Image.asset(
-                                        AppImages.film1917,
+                                        AppImages.profilePicture,
 
                                         fit: BoxFit.cover,
                                       ),

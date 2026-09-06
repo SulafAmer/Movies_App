@@ -14,7 +14,10 @@ import 'cubit/movies_states.dart';
 import 'cubit/movies_view_model.dart';
 
 class HomeTab extends StatefulWidget {
-  const HomeTab({super.key});
+  const HomeTab({super.key,
+    required this.onSeeMore,});
+
+  final VoidCallback onSeeMore;
 
   @override
   State<HomeTab> createState() => _HomeTabState();
@@ -111,11 +114,13 @@ class _HomeTabState extends State<HomeTab> {
                   MovieSection(
                     title: AppLocalizations.of(context)!.family,
                     movies: state.familyMovies,
+                    onSeeMore: widget.onSeeMore,
                   ),
 
                   MovieSection(
                     title: AppLocalizations.of(context)!.drama,
                     movies: state.dramaMovies,
+                    onSeeMore: widget.onSeeMore,
                   ),
 
                   SizedBox(

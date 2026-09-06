@@ -37,6 +37,8 @@ class AppImages {
 
   static const String playVideoImage = "assets/images/play_video_image.png";
 
+  static const String profilePicture = 'assets/images/profile.jpg';
+
   //icons
   static const String emailIcon =
       'assets/icons/email_icon.svg';
