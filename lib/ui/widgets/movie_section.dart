@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:movies_app/utils/app_routes.dart';
 
 import '../../api/models/movie.dart';
 import '../../l10n/app_localizations.dart';
@@ -10,11 +9,13 @@ import 'film_poster_widget.dart';
 class MovieSection extends StatelessWidget {
   final String title;
   final List<Movie> movies;
+  final VoidCallback onSeeMore;
 
   const MovieSection({
     super.key,
     required this.title,
     required this.movies,
+    required this.onSeeMore,
   });
 
   @override
@@ -33,9 +34,7 @@ class MovieSection extends StatelessWidget {
                 style: AppStyles.regular20White,
               ),
               TextButton(
-                onPressed: () {
-                  Navigator.pushNamed(context, 'browse_tab');
-                },
+                onPressed: onSeeMore,
                 child: Text(
                   AppLocalizations.of(context)!.see_more,
                   style: AppStyles.regular16Yellow,
@@ -67,7 +66,9 @@ class MovieSection extends StatelessWidget {
                   borderRadius: 20,
                   boxHeight: 220,
                   boxWidth: 150,
-                  filmImage: NetworkImage(movie.mediumCoverImage),
+                  filmImage: NetworkImage(
+                    movie.mediumCoverImage,
+                  ),
                   filmRate: movie.rating.toString(),
                 ),
               );

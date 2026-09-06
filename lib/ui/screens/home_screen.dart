@@ -19,36 +19,11 @@ class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
 
   @override
-  State<HomeScreen> createState() =>
-      _HomeScreenState();
+  State<HomeScreen> createState() => _HomeScreenState();
 }
 
 class _HomeScreenState extends State<HomeScreen> {
   int selectedIndex = 0;
-
-
-  List<Widget> tabs = [
-    //..getMovies() instead of => MoviesViewModel viewModel; viewModel.getMovies;
-
-    BlocProvider(create:(context) => MoviesViewModel()..getMovies(),
-    child: HomeTab()),
-    SearchTab(),
-    BrowseTab(),
-    MultiBlocProvider(
-      providers: [
-        BlocProvider.value(
-          value: getIt<WatchListCubit>(),
-        ),
-        BlocProvider.value(
-          value: getIt<HistoryCubit>(),
-        ),
-        BlocProvider.value(
-          value: getIt<ProfileCubit>(),
-        ),
-      ],
-      child: const ProfileTab(),
-    ),
-  ];
 
   List<String> bottomNavBarTabs = [
     AppImages.homeIcon,
@@ -59,57 +34,86 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final List<Widget> tabs = [
+      BlocProvider(
+        create: (context) =>
+        MoviesViewModel()
+          ..getMovies(),
+        child: HomeTab(
+          onSeeMore: () {
+            setState(() {
+              selectedIndex = 2;
+            });
+          },
+        ),
+      ),
+
+      SearchTab(),
+
+      BrowseTab(),
+
+      MultiBlocProvider(
+        providers: [
+          BlocProvider.value(
+            value: getIt<WatchListCubit>(),
+          ),
+          BlocProvider.value(
+            value: getIt<HistoryCubit>(),
+          ),
+          BlocProvider.value(
+            value: getIt<ProfileCubit>(),
+          ),
+        ],
+        child: const ProfileTab(),
+      ),
+    ];
+
     return Scaffold(
       backgroundColor: Colors.transparent,
       body: Stack(
         alignment: Alignment.bottomCenter,
         children: [
           tabs[selectedIndex],
+
           Container(
             decoration: BoxDecoration(
               color: AppColors.darkGrayColor,
-              borderRadius: BorderRadius.circular(
-                16,
-              ),
+              borderRadius: BorderRadius.circular(16),
             ),
             margin: EdgeInsets.symmetric(
               vertical: context.scaleHeight(40),
               horizontal: context.scaleWidth(15),
             ),
-            padding: EdgeInsets.symmetric(
+            padding: const EdgeInsets.symmetric(
               vertical: 20,
               horizontal: 15,
             ),
             height: context.scaleHeight(70),
             child: ListView.builder(
               scrollDirection: Axis.horizontal,
+              itemCount: 4,
               itemBuilder: (context, index) {
                 return InkWell(
                   onTap: () {
-                    selectedIndex = index;
-                    setState(() {});
+                    setState(() {
+                      selectedIndex = index;
+                    });
                   },
                   child: SizedBox(
                     width: context.scaleWidth(95),
-                    height: context.scaleHeight(
-                      20,
-                    ),
+                    height: context.scaleHeight(20),
                     child: SvgPicture.asset(
                       bottomNavBarTabs[index],
-                      colorFilter:
-                          ColorFilter.mode(
-                            selectedIndex == index
-                                ? AppColors
-                                      .yellowColor
-                                : AppColors
-                                      .whiteColor,
-                            BlendMode.srcIn,
-                          ),
+                      colorFilter: ColorFilter.mode(
+                        selectedIndex == index
+                            ? AppColors.yellowColor
+                            : AppColors.whiteColor,
+                        BlendMode.srcIn,
+                      ),
                     ),
                   ),
                 );
               },
-              itemCount: 4,
             ),
           ),
         ],
