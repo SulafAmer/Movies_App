@@ -19,15 +19,60 @@ class FirebaseUtils {
     await FirebaseAuth.instance.signOut();
   }
 
+  //
+  // static Future<UserCredential> loginWithGoogle() async {
+  //   final GoogleSignInAccount? googleUser = await GoogleSignIn.instance
+  //       .authenticate();
+  //   GoogleSignInAuthentication googleAuth = googleUser!.authentication;
+  //   final credential = GoogleAuthProvider.credential(
+  //     idToken: googleAuth.idToken,
+  //   );
+  //
+  //   return await FirebaseAuth.instance.signInWithCredential(credential);
+  // }
+
   static Future<UserCredential> loginWithGoogle() async {
     final GoogleSignInAccount? googleUser = await GoogleSignIn.instance
         .authenticate();
-    GoogleSignInAuthentication googleAuth = googleUser!.authentication;
+
+    if (googleUser == null) {
+      throw Exception('Google sign in cancelled');
+    }
+
+    final GoogleSignInAuthentication googleAuth = googleUser.authentication;
+
     final credential = GoogleAuthProvider.credential(
       idToken: googleAuth.idToken,
     );
 
-    return await FirebaseAuth.instance.signInWithCredential(credential);
+    final UserCredential userCredential = await FirebaseAuth.instance
+        .signInWithCredential(credential);
+
+    final user = userCredential.user;
+
+    if (user == null) {
+      throw Exception('User is null');
+    }
+
+    final userDoc = FirebaseFirestore.instance
+        .collection(MyUser.collectionName)
+        .doc(user.uid);
+
+    final docSnapshot = await userDoc.get();
+
+    if (!docSnapshot.exists) {
+      final myUser = MyUser(
+        id: user.uid,
+        name: user.displayName ?? '',
+        email: user.email ?? '',
+        phone: user.phoneNumber ?? '',
+        avatar: user.photoURL ?? '',
+      );
+
+      await userDoc.set(myUser.toJson());
+    }
+
+    return userCredential;
   }
 
   static Future<UserCredential> register({
