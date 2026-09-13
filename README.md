@@ -32,7 +32,6 @@ A Flutter movies application built with **The Movie DB / YTS API**, allowing use
 - Uses the **Cubit pattern** for state management across all features, keeping UI reactive and logic testable.
 - Dependency injection is handled via `get_it` + `injectable`; shared/singleton Cubits (like the Watch List Cubit) are registered with `@lazySingleton` and provided via `BlocProvider.value` to avoid premature disposal.
 - Firestore documents store only **movie IDs** (not full objects) to keep the Watch List lean — full movie data is fetched separately when needed.
-- Deliberately avoids over-engineering: no Repository layer was introduced, keeping the data flow simple and direct between Cubits and data sources.
 - Widget identity issues (e.g. switching between similar tabs) are handled using `ValueKey` to force fresh state where needed.
 
 ## 📸 Screenshots
