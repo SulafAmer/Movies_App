@@ -38,15 +38,15 @@ A Flutter movies application built with **The Movie DB / YTS API**, allowing use
 ##  Screenshots
 
 | | | |
-|---|---|---|
-| ![Login](screenshots/login.png) | ![Login Success](screenshots/login_success.png) | ![Home](screenshots/home.png) |
 | Login | Login Success | Home |
-| ![Home 2](screenshots/home2.png) | ![Browse](screenshots/browse_tab.png) | ![Search](screenshots/serach.png) |
+| ![Login](screenshots/login.png) | ![Login Success](screenshots/login_success.png) | ![Home](screenshots/home.png) |
 | Home | Browse | Search |
-| ![Movie Details 1](screenshots/movie_details1.png) | ![Movie Details 2](screenshots/movie_details2.png) | ![Profile](screenshots/profile_tab.png) |
+| ![Home 2](screenshots/home2.png) | ![Browse](screenshots/browse_tab.png) | ![Search](screenshots/serach.png) |
 | Movie Details | Movie Details | Profile |
-| ![History](screenshots/history.png) | | |
+| ![Movie Details 1](screenshots/movie_details1.png) | ![Movie Details 2](screenshots/movie_details2.png) | ![Profile](screenshots/profile_tab.png) |
 | History | | |
+| ![History](screenshots/history.png) | | |
+
 
 ##  Team & Contributions
 
