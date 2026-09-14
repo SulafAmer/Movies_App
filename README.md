@@ -1,8 +1,8 @@
-# 🎬 Movies App
+#  Movies App
 
 A Flutter movies application built with **The Movie DB / YTS API**, allowing users to browse, search, and save their favourite movies, with a full authentication flow and profile management.
 
-## ✨ Features
+##  Features
 
 - **Onboarding & Splash** – Animated intro flow for first-time users.
 - **Authentication** – Login, Register, and Forget Password with Firebase Auth.
@@ -15,7 +15,7 @@ A Flutter movies application built with **The Movie DB / YTS API**, allowing use
   - **History** – Tracks recently viewed movies, synced per user via Firestore.
   - **Update Profile** – Edit user info and avatar.
 
-## 🛠️ Tech Stack
+##  Tech Stack
 
 | Layer | Tools / Packages |
 |---|---|
@@ -27,7 +27,7 @@ A Flutter movies application built with **The Movie DB / YTS API**, allowing use
 | Networking | Dio, custom `ApiManager` abstraction |
 | Movies Data | YTS Movies API |
 
-## 🏗️ Architecture Notes
+##  Architecture Notes
 
 - Uses the **Cubit pattern** for state management across all features, keeping UI reactive and logic testable.
 - Dependency injection is handled via `get_it` + `injectable`; shared/singleton Cubits (like the Watch List Cubit) are registered with `@lazySingleton` and provided via `BlocProvider.value` to avoid premature disposal.
@@ -52,7 +52,7 @@ A Flutter movies application built with **The Movie DB / YTS API**, allowing use
 |:---:|
 | ![History](screenshots/history.png) |
 
-## 👥 Team & Contributions
+##  Team & Contributions
 
 | Member | Contributions |
 |---|---|
@@ -62,7 +62,7 @@ A Flutter movies application built with **The Movie DB / YTS API**, allowing use
 | **Serag Abdulhaleem** | Splash Screen UI + Onboarding Screen UI |
 | **Ahmed Abdulnasser** | Profile Tab UI |
 
-## 📦 Getting Started
+##  Getting Started
 
 ```bash
 flutter pub get
